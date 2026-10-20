@@ -203,6 +203,15 @@ describe("readOverrides", () => {
 describe("appendOverrides", () => {
   const src = { number: 42, url: "https://github.com/KytyPS5/KytyPS5/issues/42", created: "2026-08-10" };
 
+  it("preserves upstream Overrides text and provenance when recording a maintainer command", () => {
+    const upstream = `${UPSTREAM_BODY}\n## Overrides\n- trusted: true\n`;
+    const base = buildMirrorBody(upstream, src);
+    const out = appendOverrides(base, { os: "linux", trusted: false });
+    expect(out).toContain(base);
+    expect(mirrorSource(out)).toEqual(src);
+    expect(readOverrides(out)).toEqual({ os: "linux", trusted: false });
+  });
+
   it("appends the section after the footer without breaking provenance", () => {
     const body = appendOverrides(buildMirrorBody(UPSTREAM_BODY, src), { os: "windows" });
     expect(body.endsWith("## Overrides\n- os: windows\n")).toBe(true);
@@ -333,6 +342,13 @@ describe("reportTestedDate / reportSourceNumber", () => {
   it("returns undefined when absent", () => {
     expect(reportTestedDate("no frontmatter")).toBeUndefined();
     expect(reportSourceNumber("no source")).toBeUndefined();
+  });
+});
+
+describe("report trust boundary", () => {
+  it("does not read trust from report body text when frontmatter omits it", () => {
+    expect(reportTrusted('---\ntitle: "Stray"\n---\ntrusted: true\n')).toBe(false);
+    expect(reportTrusted("trusted: true\n")).toBe(false);
   });
 });
 

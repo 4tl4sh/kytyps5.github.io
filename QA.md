@@ -1,5 +1,15 @@
 # Verification
 
+## Source-specific trust and fork auto-merge
+
+All 217 unit tests pass. Regression tests reproduced the original trust inheritance in both the actual poller and converter before the fix. Isolated CLI tests now verify new-source reports start untrusted, explicit approvals/revocations win, same-source updates retain automatic conversion, another repository's issue number cannot supply approval, and closed-mirror label corrections do not reopen issues. Additional tests prevent upstream `Overrides` text and report-body `trusted: true` text from granting approval, and ensure maintainer commands preserve the real source footer.
+
+Fork workflow tests execute the actual Bash merge step with a stubbed GitHub CLI: an existing auto-merge request remains successful, while an unavailable request fails visibly. Read-only GitHub inspection confirmed repository auto-merge is enabled, `main` requires the `test` check, and fork data PR #936 merged after that check passed. Its command was rejected by lineage validation, so the merged change only advanced the command cursor. The authenticated production build, typecheck and report validation pass. The parity baseline explicitly excludes the three corrected trust scripts; their original workflows, authorization handler, data and API contracts retain their existing checks.
+
+Removed the demonstrably inherited `trusted` labels from open mirrors #923 and #832 after checking their source issues and maintainer comments; both remain open. No published report files were changed. These live label corrections are separate from the mocked regression tests.
+
+The complete `npm run test:ci` browser/offline pipeline passes, including report navigation, live GitHub/report updates, compatibility history, community resources, physical hero cards, directional theme ripples, production offline reloads, every original report/index field, launcher feeds, catalog and sitemap. It reused the existing local development server and started a separate production preview; the development server remains available on port 5173.
+
 ## Compatibility regression notices
 
 All 203 unit tests pass, including eleven history tests covering regional identities, highest-ever status, platform isolation, recovery, missing versions, numeric game-version tie-breaking, persisted checkpoints, incremental peak/decline processing, cache revisions, renamed reports, merged branches hidden by path simplification, peaks created during merge resolution and local-export-to-commit source-link enrichment. The targeted browser check verifies visible current/previous statuses and game versions, preserved source/build details, OS switching, live recovery and regression, unknown versions, both themes at 1440/768/390px and the four actual historical declines currently found in committed reports. Captures wait for settled opacity. Synthetic UI fixtures do not change production reports. Evidence is in `.impeccable/review/regressions/`.

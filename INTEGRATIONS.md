@@ -9,11 +9,12 @@ Baseline: upstream commit `8adc056` (2026-10-19). The redesign changes the prese
 - `compat-set-fields.yml`: authorized report-field overrides.
 - `refresh-data.yml`: half-hourly GitHub snapshot comparison and conditional deployment.
 - `deploy.yml`: full Pages builds and dependency-free content overlays with cached-build ancestry guards.
-- Original catalog importer, issue converter, issue-form parsing, authorization/mirroring helpers, overrides, report validator, compatibility parser/status aggregation and launcher update-feed builder.
+- Original catalog importer, issue-form parsing, authorization, override command handler, report validator, compatibility parser/status aggregation and launcher update-feed builder.
 - Full imported catalog at `src/data/games.json` and all authoritative Markdown reports under `src/content/compat/`.
 
 ## Small adapters and added checks
 
+- Report trust is now scoped to the original source issue. The converter, poller and status-issues helper intentionally correct the original game/OS trust inheritance; the existing command workflows and authorization checks are unchanged. New reports need their own `/trusted` approval, while updates to the same approved source retain it. Upstream answer text cannot act as a maintainer trust override. See [report trust](docs/REPORT_TRUST.md).
 - CI retains its original triggers, permissions, report-only gate, failure handling and auto-deploy flow. Unit checks use `test:unit`; full builds additionally install Chromium and run frontend/browser/offline checks.
 - Weekly catalog imports retain their existing source, schedule, shrink guard and automated PR process. Generated regional aliases are included in that PR alongside the existing catalog and compatibility seed.
 - `export-site-compat-json.mjs` delegates to the redesigned export. It uses the original parser/index builder and preserves version-2 fields and canonical title IDs. Additive fields supply report revisions, metadata, regional aliases and latest-report details; all screenshot arrays are retained. Markdown changes feed both public JSON and the bundled fallback. The original launcher compatibility exporter remains unchanged.
@@ -27,7 +28,7 @@ Compatibility regression notices use the stored `src/data/compatibility-peaks.js
 
 The added community-resource system has its own sources: `src/data/forks.json` and `patches/`. It exports `/data/community.json` and content-versioned ZIP downloads under `/patch-files/`. Neither report conversion nor report deletion writes these sources. Regional IDs resolve through the existing catalog. The original report and launcher schemas are unaffected.
 
-`community-forks.yml` accepts collaborator commands on the issue identified by `FORKS_ISSUE_NUMBER`, validates repository write access and fork lineage, and opens/updates `data/community-forks`. CI checks and the existing deployment flow publish its merged result. The new branch is included in CI's existing auto-deploy fallback. All original operational workflows other than that additive CI condition remain unchanged. See [community maintenance](docs/COMMUNITY_RESOURCES.md) for setup and command semantics.
+`community-forks.yml` accepts collaborator commands on the issue identified by `FORKS_ISSUE_NUMBER`, validates repository write access and fork lineage, and opens/updates `data/community-forks`. It enables auto-merge after required checks pass and fails visibly if auto-merge cannot be enabled. The existing deployment flow publishes its merged result. The new branch is included in CI's existing auto-deploy fallback. All original operational workflows other than that additive CI condition remain unchanged. See [community maintenance](docs/COMMUNITY_RESOURCES.md) for setup and command semantics.
 
 | Resource | Contract |
 | --- | --- |
@@ -42,6 +43,6 @@ Original best-across-platforms status aggregation is unchanged. Homepage latest-
 
 ## Verification
 
-`npm run test:unit` covers original import, transformation, mirroring, update-feed and compatibility contracts plus the frontend export adapter. `node scripts/verify-parity.mjs` compares the retained operational sources against the baseline, checks every report/index/feed export and exercises metadata and community destinations in the browser. `npm run test:ci` starts dev/production servers and runs the browser suites after a production build; Chromium must be installed (`npx playwright install --with-deps chromium` on Linux).
+`npm run test:unit` covers original import, transformation, mirroring, update-feed and compatibility contracts plus the frontend export adapter. Source-scoped trust tests execute the actual poller and converter in isolated temporary repositories with mocked GitHub responses; fork workflow tests exercise its actual merge step with a stubbed GitHub CLI. `node scripts/verify-parity.mjs` compares retained operational sources against the baseline (excluding the three deliberately corrected trust scripts), checks every report/index/feed export and exercises metadata and community destinations in the browser. `npm run test:ci` starts dev/production servers and runs the browser suites after a production build; Chromium must be installed (`npx playwright install --with-deps chromium` on Linux).
 
 Tests do not create or edit real upstream issues, publish report PRs, download emulator binaries or run games. Those remote mutations remain the responsibility of the original authorized workflows and existing repository secrets.

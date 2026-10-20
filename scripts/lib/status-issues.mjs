@@ -170,9 +170,12 @@ export function mirrorUpstreamBody(body) {
  */
 export function readOverrides(body) {
   const lines = String(body ?? "").split(/\r?\n/);
+  // Upstream answers may contain headings of their own. Only the mirror's
+  // appended maintainer section can grant trust or override mirrored fields.
+  const sourceIndex = lines.findLastIndex((line) => /^##\s+Source\s*$/.test(line.trim()));
   let collecting = false;
   const overrides = {};
-  for (const line of lines) {
+  for (const line of lines.slice(sourceIndex + 1)) {
     if (/^##\s+Overrides\s*$/.test(line.trim())) {
       collecting = true;
       continue;
@@ -187,7 +190,7 @@ export function readOverrides(body) {
     else if (key === "titleid") overrides.titleId = value;
     else if (key === "title") overrides.title = value;
     else if (key === "status") overrides.status = value;
-    else if (key === "trusted") overrides.trusted = value.toLowerCase() === "true" || value === "1";
+    else if (key === "trusted" && sourceIndex >= 0) overrides.trusted = value.toLowerCase() === "true" || value === "1";
   }
   return overrides;
 }
@@ -215,7 +218,9 @@ export function refreshMirrorBody(issueBody, mirrorBody, { number, url, created 
  */
 export function appendOverrides(body, overrides = {}) {
   const raw = String(body ?? "");
-  const idx = raw.search(/^##\s+Overrides\s*$/m);
+  const sourceIndex = [...raw.matchAll(/^##[ \t]+Source[ \t]*\r?$/gm)].at(-1)?.index ?? 0;
+  const relativeIndex = raw.slice(sourceIndex).search(/^##\s+Overrides\s*$/m);
+  const idx = relativeIndex < 0 ? -1 : sourceIndex + relativeIndex;
   const base = (idx > -1 ? raw.slice(0, idx) : raw).trimEnd();
   const entries = [];
   if (overrides.os) entries.push(`- os: ${overrides.os}`);
@@ -262,7 +267,8 @@ export function reportTitle(md) {
 
 /** The `trusted` frontmatter of a report. */
 export function reportTrusted(md) {
-  const m = String(md ?? "").match(/^trusted:\s*(true|false)\s*$/m);
+  const frontmatter = String(md ?? "").match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/)?.[1] ?? "";
+  const m = frontmatter.match(/^trusted:\s*(true|false)\s*$/m);
   return m ? m[1] === "true" : false;
 }
 

@@ -48,6 +48,9 @@ console.log(
 
 // These operational workflows/scripts must remain byte-identical to the original
 // migration baseline. CI and catalog-PR gates have separate, additive UI checks.
+// The converter, poller and status-issues helper intentionally differ only for
+// source-scoped trust. trust-pipeline.test.mjs exercises both actual CLIs;
+// status-issues.test.mjs covers maintainer overrides and the trust boundary.
 const unchanged = [
   ".github/workflows/compat-issues.yml",
   ".github/workflows/compat-convert.yml",
@@ -55,15 +58,12 @@ const unchanged = [
   ".github/workflows/refresh-data.yml",
   ".github/workflows/deploy.yml",
   "scripts/import-games.mjs",
-  "scripts/issue-to-compat.mjs",
-  "scripts/sync-status-issues.mjs",
   "scripts/set-compat-override.mjs",
   "scripts/validate-compat.mjs",
   "scripts/export-compat-json.mjs",
   "scripts/lib/compat-export.mjs",
   "scripts/lib/updates-feed.mjs",
   "scripts/lib/transform.mjs",
-  "scripts/lib/status-issues.mjs",
 ];
 for (const file of unchanged) {
   const baseline = execFileSync("git", ["show", `8adc056:${file}`], {
@@ -82,7 +82,7 @@ for (const file of await readdir(".github/workflows")) {
   assert(workflow.on && workflow.jobs, file);
 }
 console.log(
-  "PASS original issue mirroring, conversion, authorization, overrides, imports, scheduled refresh and Pages deployment retained",
+  "PASS original operational workflows, authorization, imports and Pages deployment retained; source-scoped trust covered by CLI regression tests",
 );
 
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:5173";
