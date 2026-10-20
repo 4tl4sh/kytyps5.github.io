@@ -107,9 +107,10 @@ const result = await reconcileForkComments(registry, comments, {
     });
     if (!value)
       throw new Error(
-        `Repository ${repository} was not found or is private. Provide a public fork URL.`,
+        `Repository ${repository} was not found or is private. Provide a public repository URL.`,
       );
-    if (value.private) throw new Error("Only public forks can be listed.");
+    if (value.private)
+      throw new Error("Only public repositories can be listed.");
     return value;
   },
 });

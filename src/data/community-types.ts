@@ -16,6 +16,7 @@ export type CommunityFork = {
   updatedAt: string;
   addedBy: string;
   sourceUrl: string;
+  lineageOverride?: boolean;
 };
 export type PatchFile = {
   name: string;

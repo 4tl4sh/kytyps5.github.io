@@ -26,6 +26,8 @@ async function run({
   permission = "write",
   pending,
   failMetadata = false,
+  inputComment = comment,
+  metadata = repository,
 } = {}) {
   const root = await mkdtemp(path.join(tmpdir(), "kyty-fork-cli-"));
   try {
@@ -36,7 +38,7 @@ async function run({
     );
     await writeFile(
       path.join(root, "event.json"),
-      JSON.stringify({ issue: { number: 7 }, comment }),
+      JSON.stringify({ issue: { number: 7 }, comment: inputComment }),
     );
     const responses = {
       "https://api.github.com/repos/fixture/site/issues/7": {},
@@ -47,10 +49,10 @@ async function run({
           ? { content: Buffer.from(JSON.stringify(pending)).toString("base64") }
           : { status: 404 },
       "https://api.github.com/repos/fixture/site/issues/7/comments?per_page=100&page=1":
-        [comment],
+        [inputComment],
       "https://api.github.com/repos/tester/fork": failMetadata
         ? { status: 503 }
-        : repository,
+        : metadata,
     };
     const preload = path.join(root, "network.mjs");
     await writeFile(
@@ -98,6 +100,35 @@ async function run({
   }
 }
 describe("fork workflow integration", () => {
+  it("lets a write collaborator force a standalone repository through the actual CLI", async () => {
+    const result = await run({
+      inputComment: {
+        ...comment,
+        body: "/force https://github.com/tester/fork PPSA00001 PPSA00002",
+      },
+      metadata: { ...repository, fork: false, source: undefined },
+    });
+    expect(result.failed).toBe(false);
+    expect(result.registry.forks[0]?.targetTitleIds).toEqual([
+      "PPSA00001",
+      "PPSA00002",
+    ]);
+    expect(result.registry.forks[0]?.lineageOverride).toBe(true);
+  });
+  it.each(["read", "triage"])(
+    "keeps /force restricted for %s collaborators",
+    async (permission) => {
+      const result = await run({
+        permission,
+        inputComment: {
+          ...comment,
+          body: "/force https://github.com/tester/fork",
+        },
+      });
+      expect(result.failed).toBe(true);
+      expect(result.registry).toEqual(empty);
+    },
+  );
   it.each(["true", "false"])(
     "checks existing merge state after a failed auto-merge request (%s)",
     async (enabled) => {
@@ -177,6 +208,9 @@ describe("fork workflow integration", () => {
       "github.event.issue.number == fromJSON(vars.FORKS_ISSUE_NUMBER)",
     );
     expect(workflow.jobs.update.if).toContain('"COLLABORATOR"');
+    expect(workflow.jobs.update.if).toContain(
+      "startsWith(github.event.comment.body, '/force ')",
+    );
     expect(workflow.concurrency["cancel-in-progress"]).toBe(false);
     expect(
       parse(await readFile(".github/workflows/import-games.yml", "utf8")).on
