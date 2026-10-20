@@ -48,6 +48,7 @@ import {
 } from "../data/types";
 import aliases from "../data/aliases.json";
 import { CompatibilitySummary } from "../components/compatibility-summary";
+import { CompatibilityRegression } from "../components/compatibility-regression";
 import { cachedJson } from "../lib/cache";
 import { pageMetadata } from "../lib/page-metadata";
 import { LoadingState } from "../components/loading-state";
@@ -829,6 +830,10 @@ export function GamePage() {
                       testedVersion={report.testedVersion}
                       releaseTag={release.tag_name}
                       publishedAt={release.published_at}
+                    />
+                    <CompatibilityRegression
+                      report={report}
+                      peak={data.previousBest?.[report.os]}
                     />
                     <dl className="report-metadata">
                       <div>

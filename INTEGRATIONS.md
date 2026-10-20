@@ -23,6 +23,8 @@ Baseline: upstream commit `8adc056` (2026-10-19). The redesign changes the prese
 
 ## Public contracts
 
+Compatibility regression notices use the stored `src/data/compatibility-peaks.json` registry plus incremental report commits after its saved checkpoint. Site detail JSON adds optional per-platform `previousBest` evidence and includes it in the detail revision. Current status aggregation and launcher/API contracts are unchanged; original report ingestion and Pages workflows remain intact. The weekly catalog PR also saves the refreshed peak registry, with a full-history checkout. See [compatibility history](docs/COMPATIBILITY_HISTORY.md) for persistence, version tie-breaking and missing-version behavior.
+
 The added community-resource system has its own sources: `src/data/forks.json` and `patches/`. It exports `/data/community.json` and content-versioned ZIP downloads under `/patch-files/`. Neither report conversion nor report deletion writes these sources. Regional IDs resolve through the existing catalog. The original report and launcher schemas are unaffected.
 
 `community-forks.yml` accepts collaborator commands on the issue identified by `FORKS_ISSUE_NUMBER`, validates repository write access and fork lineage, and opens/updates `data/community-forks`. CI checks and the existing deployment flow publish its merged result. The new branch is included in CI's existing auto-deploy fallback. All original operational workflows other than that additive CI condition remain unchanged. See [community maintenance](docs/COMMUNITY_RESOURCES.md) for setup and command semantics.

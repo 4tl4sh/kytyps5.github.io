@@ -6,9 +6,15 @@ import {
   parseReport,
   siteGameKey,
 } from "./compat-export.mjs";
+import {
+  buildPreviousBests,
+  loadPeakLedger,
+  peakReports,
+} from "./report-history.mjs";
 
 /** Original ingestion/parser contracts, enriched for the redesigned frontend. */
-export function buildSiteData(catalog, reports) {
+export function buildSiteData(catalog, reports, history = []) {
+  const previousBests = buildPreviousBests(catalog, reports, history);
   const metadata = new Map(
     catalog.flatMap((game) =>
       [game.titleId, ...(game.allTitleIds ?? [])].map((id) => [
@@ -28,6 +34,9 @@ export function buildSiteData(catalog, reports) {
       title: entry.title,
       titleId: entry.titleId,
       reports: tests,
+      ...(previousBests[entry.key]
+        ? { previousBest: previousBests[entry.key] }
+        : {}),
     };
     details[entry.key] = detail;
     const allTitleIds = game?.allTitleIds ?? [entry.titleId];
@@ -67,7 +76,7 @@ export function buildSiteData(catalog, reports) {
   return { games, aliases, details, gui: buildCompatibilityDb(reports) };
 }
 
-export async function loadSiteData() {
+export async function loadSiteData({ backfillHistory = false } = {}) {
   const catalog = JSON.parse(await readFile("src/data/games.json", "utf8"));
   const files = (await readdir("src/content/compat"))
     .filter((file) => file.endsWith(".md"))
@@ -80,7 +89,15 @@ export async function loadSiteData() {
       ),
     ),
   );
-  return { ...buildSiteData(catalog, reports), catalog, reports };
+  const peakLedger = await loadPeakLedger(catalog, reports, {
+    backfill: backfillHistory,
+  });
+  return {
+    ...buildSiteData(catalog, reports, peakReports(peakLedger)),
+    peakLedger,
+    catalog,
+    reports,
+  };
 }
 
 export function buildSitemap(games) {

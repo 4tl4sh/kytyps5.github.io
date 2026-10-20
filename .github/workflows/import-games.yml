@@ -26,6 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -48,6 +50,7 @@ jobs:
             src/data/games.json
             src/data/compat-index.json
             src/data/aliases.json
+            src/data/compatibility-peaks.json
           commit-message: "data: refresh games database"
           branch: data/games-refresh
           title: "data: refresh games database"

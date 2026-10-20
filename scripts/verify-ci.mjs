@@ -59,6 +59,7 @@ try {
     "verify",
     "verify-functionality",
     "verify-audit-fixes",
+    "verify-regressions",
     "verify-featured",
     "verify-community",
     "verify-enhancements",

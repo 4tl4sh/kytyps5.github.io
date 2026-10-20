@@ -21,6 +21,8 @@ Browser checks use the installed Chrome on Windows. Set `CHROME_PATH` for anothe
 
 ## What is included
 
+- Compatibility regression notices backed by [stored historical peak records](docs/COMPATIBILITY_HISTORY.md), with previous game versions and preserved test evidence.
+
 - Home, download, compatibility, game detail, documentation, FAQ, contribution, about and not-found routes.
 - All 347 tested games and 372 OS-specific reports from the reference snapshot; search, status/platform filters, sort and load-more pagination. Returning from a game restores the query, filters, sort, loaded pages and scroll position.
 - Game metadata and regional title IDs; original community notes and source links; per-platform status; screenshot viewer; build-age notices; legacy and alternate title-ID links.

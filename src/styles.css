@@ -1973,6 +1973,44 @@ pre {
   text-decoration: underline;
   overflow-wrap: anywhere;
 }
+.regression-notice {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  background: var(--status-menu-bg);
+  color: var(--status-menu);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.regression-notice > strong {
+  display: block;
+  margin-bottom: 6px;
+}
+.regression-notice details {
+  margin-top: 12px;
+}
+.regression-notice summary {
+  cursor: pointer;
+  width: fit-content;
+  padding-block: 8px;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.regression-notice details[open] > summary {
+  margin-bottom: 8px;
+}
+.regression-notice a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.regression-build {
+  margin-block: 8px 12px;
+}
+.regression-build > span {
+  font-weight: 650;
+}
 .game-detail-heading .button {
   margin-top: 22px;
 }
