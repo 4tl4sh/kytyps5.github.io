@@ -1,5 +1,13 @@
 # Verification
 
+## Compatibility regression notices
+
+All 203 unit tests pass, including eleven history tests covering regional identities, highest-ever status, platform isolation, recovery, missing versions, numeric game-version tie-breaking, persisted checkpoints, incremental peak/decline processing, cache revisions, renamed reports, merged branches hidden by path simplification, peaks created during merge resolution and local-export-to-commit source-link enrichment. The targeted browser check verifies visible current/previous statuses and game versions, preserved source/build details, OS switching, live recovery and regression, unknown versions, both themes at 1440/768/390px and the four actual historical declines currently found in committed reports. Captures wait for settled opacity. Synthetic UI fixtures do not change production reports. Evidence is in `.impeccable/review/regressions/`.
+
+The authenticated production build and original-system parity checks pass after the persistence change. The complete browser/offline suite also passed before that refinement; targeted regression and parity checks were rerun afterward. The original report ingestion and Pages workflow sources remain unchanged. The catalog workflow adds a full-history checkout and saves the stored peak registry in its existing weekly PR.
+
+Independent review scored the merge-history gap resolved, then verified both persistence fixes: equivalent committed reports enrich stored source links, and the unused public registry endpoint was removed to preserve the existing content-only deployment contract. The scoped final verdict is **ship**. The notice styling and all six settled captures passed the local-extension review.
+
 ## Community patches and forks
 
 Added independent patch/fork directories and per-game resources without changing report storage, status aggregation, launcher feed schemas or existing report commands. The fork workflow restricts changes to write/maintain/admin collaborators on one configured issue, replays queued commands in order and preserves changes already waiting in its data PR. Forks with no game targets never appear on game pages. Patch folders, descriptions and ZIPs are validated and exported during the normal build.

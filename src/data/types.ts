@@ -40,6 +40,16 @@ export interface Report {
   notes: string;
   source?: { label: string; url?: string };
 }
+export type CompatibilityPeak = Pick<
+  Report,
+  | "slug"
+  | "titleId"
+  | "os"
+  | "status"
+  | "testedVersion"
+  | "testedDate"
+  | "gameVersion"
+> & { recordUrl?: string };
 export const statusMeta: Record<
   Status,
   { label: string; description: string }

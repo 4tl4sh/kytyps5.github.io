@@ -3,7 +3,8 @@ import { loadSiteData, buildSitemap } from "./lib/site-data.mjs";
 import { exportCommunityData } from "./lib/community-data.mjs";
 
 // Markdown and the imported catalog are authoritative; public JSON is output.
-const { games, aliases, details, gui, catalog, reports } = await loadSiteData();
+const { games, aliases, details, gui, catalog, reports, peakLedger } =
+  await loadSiteData();
 await exportCommunityData();
 await mkdir("public/data/compat", { recursive: true });
 for (const file of await readdir("public/data/compat")) {
@@ -11,6 +12,10 @@ for (const file of await readdir("public/data/compat")) {
     await unlink(`public/data/compat/${file}`);
 }
 await Promise.all([
+  writeFile(
+    "src/data/compatibility-peaks.json",
+    JSON.stringify(peakLedger, null, 2) + "\n",
+  ),
   writeFile("src/data/compat-index.json", JSON.stringify(games) + "\n"),
   writeFile("src/data/aliases.json", JSON.stringify(aliases) + "\n"),
   writeFile("public/data/catalog.json", JSON.stringify(catalog) + "\n"),

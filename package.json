@@ -29,6 +29,7 @@
     "test:audit-fixes": "node scripts/verify-audit-fixes.mjs",
     "test:featured": "node scripts/verify-featured.mjs",
     "test:community-ui": "node scripts/verify-community.mjs",
+    "test:regressions": "node scripts/verify-regressions.mjs",
     "format": "prettier --write \"src/**/*.tsx\" \"src/**/*.ts\" \"src/*.css\" \"scripts/*.mjs\" vite.config.ts index.html"
   },
   "dependencies": {
