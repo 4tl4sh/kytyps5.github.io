@@ -1,0 +1,276 @@
+/* Theme and compatibility extensions share the existing editorial palette. */
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--surface);
+  color: var(--ink);
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.theme-toggle:hover {
+  background: var(--tab-ground);
+  transform: rotate(-9deg);
+}
+
+.capture-section,
+.platform-primary,
+.download-platform-0,
+.site-footer {
+  background: var(--deep-field);
+  color: var(--on-field);
+}
+.hero-caption-chip {
+  background: var(--deep-field);
+  color: var(--on-field);
+}
+.button.light,
+.capture-selector button[aria-pressed="true"],
+.capture-bottom a,
+.platform-1,
+.download-platform-2,
+.download-band,
+.report-callout,
+.inline-help,
+.about-logomark,
+.reporting-guide,
+.start-mark,
+.community-plus,
+.open-symbol {
+  color: var(--on-mint);
+}
+.capture-selector button[aria-pressed="true"] {
+  color: var(--on-mint);
+}
+.skip-link {
+  color: var(--on-mint);
+}
+.button.light:hover {
+  background: var(--on-field);
+  color: var(--on-mint);
+}
+:root[data-theme="dark"] .doc-callout {
+  color: var(--on-mint) !important;
+}
+:root[data-theme="dark"] .download-platform-2 > p,
+:root[data-theme="dark"] .platform-1 > p,
+:root[data-theme="dark"] .report-callout p,
+:root[data-theme="dark"] .inline-help p,
+:root[data-theme="dark"] .reporting-guide p {
+  color: var(--on-mint) !important;
+}
+:root[data-theme="dark"] .platform-1 .platform-card-heading > span,
+:root[data-theme="dark"] .download-platform-2 .download-platform-top > span {
+  background: #073f3b12;
+}
+:root[data-theme="dark"] .hero-main-card {
+  background: #f7f9f8;
+  color: #073f3b;
+}
+:root[data-theme="dark"] .game-sleeve {
+  color: #073f3b;
+}
+:root[data-theme="dark"] .hero-game-caption .status-in-game {
+  background: #e0efdb;
+  color: #285c31;
+}
+:root[data-theme="dark"] .thanks-links a:hover,
+:root[data-theme="dark"] .contributor-grid a:hover,
+:root[data-theme="dark"] .repository-links a:hover,
+:root[data-theme="dark"] .repo-stats > a:hover {
+  background: var(--tab-ground);
+}
+:root[data-theme="dark"] .icon-button:hover:not(:disabled) {
+  color: var(--on-mint);
+}
+:root[data-theme="dark"] .lightbox-controls .icon-button {
+  background: var(--on-field);
+  color: var(--on-mint);
+}
+:root[data-theme="dark"] .lightbox {
+  color: var(--on-field);
+}
+:root[data-theme="dark"] .lightbox-close {
+  background: var(--deep-field);
+  color: var(--on-field);
+}
+::selection {
+  background: var(--mint);
+  color: var(--on-mint);
+}
+
+.compatibility-summary {
+  margin-block: 4px 34px;
+}
+.compatibility-summary-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.compatibility-summary h3 {
+  font-size: 15px;
+  font-weight: 650;
+}
+main .compatibility-summary-heading p {
+  font-size: 13px !important;
+  color: var(--muted) !important;
+}
+.compatibility-bar {
+  display: flex;
+  width: 100%;
+  gap: 3px;
+  height: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.compatibility-segment {
+  height: 100%;
+  min-width: 2px;
+  display: block;
+  transition: opacity 0.2s;
+}
+a.compatibility-segment:hover {
+  opacity: 0.65;
+}
+.compatibility-segment:focus-visible {
+  outline-offset: -4px;
+  outline-color: var(--on-mint);
+}
+.segment-in-game {
+  background: var(--chart-game);
+}
+.segment-main-menu {
+  background: var(--chart-menu);
+}
+.segment-logo {
+  background: var(--chart-logo);
+}
+.segment-doesnt-boot {
+  background: var(--chart-boot);
+}
+.segment-untested {
+  background: var(--chart-untested);
+}
+.compatibility-legend {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 20px;
+  margin-top: 17px;
+}
+.compatibility-legend:has(> :nth-child(5)) {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.compatibility-legend-item {
+  display: grid;
+  grid-template-columns: 9px 1fr auto;
+  align-items: center;
+  gap: 5px 8px;
+  font-size: 13px;
+  padding: 7px 0;
+  line-height: 1.5;
+}
+a.compatibility-legend-item:hover {
+  text-decoration: underline;
+}
+.compatibility-key {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+.compatibility-legend-item strong {
+  grid-column: 2;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.compatibility-legend-item strong > span {
+  color: var(--muted);
+  font-weight: 400;
+}
+.compatibility-percent {
+  grid-column: 3;
+  grid-row: 2;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+main p.compatibility-summary-note {
+  font-size: 13px !important;
+  color: var(--muted) !important;
+  margin-top: 12px;
+}
+
+@media (max-width: 1100px) {
+  .header-actions {
+    gap: 14px;
+  }
+  .compatibility-legend {
+    gap: 9px 15px;
+  }
+  .compatibility-legend-item {
+    grid-template-columns: 8px 1fr;
+  }
+  .compatibility-percent {
+    grid-column: 2;
+    grid-row: 3;
+  }
+}
+@media (max-width: 680px) {
+  .header-inner { gap: 10px; }
+  .header-inner .wordmark { font-size: 25px; gap: 6px; }
+  .header-inner .wordmark svg { width: 25px; height: 25px; }
+  .header-actions {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .header-actions .button { white-space: nowrap; flex-shrink: 0; padding-inline: 10px; }
+  .theme-toggle {
+    width: 35px;
+    height: 38px;
+  }
+  .compatibility-summary {
+    margin-bottom: 28px;
+  }
+  .compatibility-summary-heading {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .compatibility-summary h3 {
+    font-size: 15px;
+  }
+  .compatibility-legend,
+  .compatibility-legend:has(> :nth-child(5)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 20px;
+  }
+  .compatibility-legend-item {
+    grid-template-columns: 8px 1fr auto;
+  }
+  .compatibility-percent {
+    grid-column: 3;
+    grid-row: 2;
+  }
+}
+@media (max-width: 360px) {
+  .header-inner { width: calc(100% - 32px); }
+  .header-inner .wordmark { font-size: 22px; gap: 4px; }
+  .header-inner .wordmark svg { width: 22px; height: 22px; }
+  .header-actions .button { padding-inline: 8px; }
+  .header-actions .mobile-menu-button { width: 26px; }
+  .theme-toggle { width: 32px; }
+  .header-actions .button > svg { display: none; }
+  .compatibility-legend-item { grid-template-columns: 8px minmax(0, 1fr); }
+  .compatibility-percent { grid-column: 2; grid-row: 3; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle,
+  .compatibility-segment {
+    transition: none;
+  }
+}

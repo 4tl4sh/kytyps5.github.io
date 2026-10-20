@@ -1,0 +1,41 @@
+# Functional parity with the original website
+
+Baseline: upstream commit `8adc056` (2026-10-19). The redesign changes the presentation and navigation. The existing GitHub/static-data architecture remains in use.
+
+## Retained without source changes
+
+- `.github/workflows/compat-issues.yml`: half-hourly upstream status-issue mirroring and lifecycle tracking.
+- `compat-convert.yml`: authorized `/compat` conversion, validation, report PRs and mirror handling.
+- `compat-set-fields.yml`: authorized report-field overrides.
+- `refresh-data.yml`: half-hourly GitHub snapshot comparison and conditional deployment.
+- `deploy.yml`: full Pages builds and dependency-free content overlays with cached-build ancestry guards.
+- Original catalog importer, issue converter, issue-form parsing, authorization/mirroring helpers, overrides, report validator, compatibility parser/status aggregation and launcher update-feed builder.
+- Full imported catalog at `src/data/games.json` and all authoritative Markdown reports under `src/content/compat/`.
+
+## Small adapters and added checks
+
+- CI retains its original triggers, permissions, report-only gate, failure handling and auto-deploy flow. Unit checks use `test:unit`; full builds additionally install Chromium and run frontend/browser/offline checks.
+- Weekly catalog imports retain their existing source, schedule, shrink guard and automated PR process. Generated regional aliases are included in that PR alongside the existing catalog and compatibility seed.
+- `export-site-compat-json.mjs` delegates to the redesigned export. It uses the original parser/index builder and preserves version-2 fields and canonical title IDs. Additive fields supply report revisions, metadata, regional aliases and latest-report details; all screenshot arrays are retained. Markdown changes feed both public JSON and the bundled fallback. The original launcher compatibility exporter remains unchanged.
+- `fetch-github-data.mjs` delegates to the GitHub snapshot refresh. It retains the original endpoints and public snapshot shape, adds a bundled fallback and preserves previous valid data on request failures. Token-shaped repository properties and asset download counters are excluded. The original tested update-feed builder produces the launcher update feed.
+- Sitemap generation reads the same authoritative reports/catalog. Original canonical game routes, social previews, structured data and noindex rules for untested/unknown games are retained.
+- Browser caching, theme switching, report refresh, richer screenshot browsing, accurate contributor totals and compatibility-history restoration are additions.
+
+## Public contracts
+
+| Resource | Contract |
+| --- | --- |
+| `/data/github.json` | `generatedAt`, `repo`, `latestRelease`, `contributors`, `contributorsCount`, `commits` |
+| `/data/updates.json` | Original launcher update-feed builder and asset mapping |
+| `/data/compatibility.json` | Original title-ID keys, launcher status enums, comments, report counts and OS blocks |
+| `/data/compat-index.json` | Version 2, original tested-game fields plus additive frontend metadata |
+| `/data/compat/<KEY>.json` | Version 2, canonical key/title/title ID and full original report payloads |
+| `/data/catalog.json` | Full imported catalog for untested regional-title routes |
+
+Original best-across-platforms status aggregation is unchanged. Homepage latest-report badges explicitly identify that report's platform and test date.
+
+## Verification
+
+`npm run test:unit` covers original import, transformation, mirroring, update-feed and compatibility contracts plus the frontend export adapter. `node scripts/verify-parity.mjs` compares the retained operational sources against the baseline, checks every report/index/feed export and exercises metadata and community destinations in the browser. `npm run test:ci` starts dev/production servers and runs the browser suites after a production build; Chromium must be installed (`npx playwright install --with-deps chromium` on Linux).
+
+Tests do not create or edit real upstream issues, publish report PRs, download emulator binaries or run games. Those remote mutations remain the responsibility of the original authorized workflows and existing repository secrets.

@@ -1,0 +1,47 @@
+/* Two page captures; only transforms of a fixed round window animate. */
+/* Theme colors must settle before capture, without dozens of live color tweens. */
+html[data-theme-ripple] *,
+html[data-theme-ripple] *::before,
+html[data-theme-ripple] *::after {
+  transition: none !important;
+}
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(root),
+::view-transition-old(root),
+::view-transition-new(theme-incoming) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-group(root) {
+  z-index: 1;
+}
+::view-transition-group(theme-incoming) {
+  animation: none;
+  z-index: 2;
+  left: calc(var(--ripple-x) - var(--ripple-radius));
+  top: calc(var(--ripple-y) - var(--ripple-radius));
+  width: var(--ripple-diameter);
+  height: var(--ripple-diameter);
+  border-radius: 50%;
+  overflow: hidden;
+  transform-origin: center;
+  transform: scale(0.001);
+  will-change: transform;
+}
+::view-transition-image-pair(theme-incoming) {
+  position: absolute;
+  left: calc(var(--ripple-radius) - var(--ripple-x));
+  top: calc(var(--ripple-radius) - var(--ripple-y));
+  width: 100vw;
+  height: 100vh;
+  transform-origin: var(--ripple-x) var(--ripple-y);
+  transform: scale(1000);
+  will-change: transform;
+}
+::view-transition-new(theme-incoming) {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
