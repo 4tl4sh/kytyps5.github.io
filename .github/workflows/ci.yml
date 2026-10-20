@@ -88,7 +88,7 @@ jobs:
         if: steps.scope.outputs.scope != 'report'
         env:
           CHECK_SEED_SYNC: ${{ github.head_ref == 'data/games-refresh' }}
-        run: npm test
+        run: npm run test:unit
 
       # prebuild validates compat reports and regenerates the GitHub snapshot,
       # the GUI + site compat JSON and the sitemap (GITHUB_TOKEN avoids rate
@@ -99,6 +99,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run build
+
+      - name: Install browser for interaction checks
+        if: steps.scope.outputs.scope != 'report'
+        run: npx playwright install --with-deps chromium
+
+      - name: Browser and offline integration checks
+        if: steps.scope.outputs.scope != 'report'
+        run: npm run test:ci
 
       - name: Reopen mirror issue if tests failed on a compat PR
         if: failure() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && startsWith(github.head_ref, 'compat/')

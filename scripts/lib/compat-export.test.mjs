@@ -2,6 +2,7 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
+import { loadSiteData } from "./site-data.mjs";
 import {
   aggregateStatuses,
   buildCompatibilityDb,
@@ -226,7 +227,7 @@ describe("GUI contract (faithful C++ replica on our export)", () => {
     validateSchema(fresh);
 
     if (process.env.CHECK_SEED_SYNC === "true") {
-      expect(seed).toEqual(fresh);
+      expect(seed).toEqual((await loadSiteData()).games);
     }
 
     // Cross-check: the GUI launcher DB built from the same reports still

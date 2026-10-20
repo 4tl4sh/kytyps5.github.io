@@ -1,18 +1,20 @@
-# Dependencies
 node_modules/
-
-# Build output
 dist/
-
-# Local tooling / IDE metadata
+.reference/
+.reference-components/
+.taste-skill/
+.impeccable/
+public/data/
+public/sitemap.xml
+.env
+.env.*
+!.env.example
+test-results/
+*.log
+*.tsbuildinfo
 .freebuff/
 .agents/
 .claude/
 skills-lock.json
 design-system/
-*.log
 .DS_Store
-
-# Generated at build time (prebuild regenerates these)
-public/data/
-public/sitemap.xml
