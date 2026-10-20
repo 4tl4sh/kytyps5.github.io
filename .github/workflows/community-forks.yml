@@ -68,7 +68,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.ACTIONS_BOT_TOKEN || secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.pr.outputs.pull-request-number }}
-        run: gh pr merge "$PR_NUMBER" --auto --squash || echo "Auto-merge unavailable; merge the data PR after its checks pass."
+        run: |
+          if ! gh pr merge "$PR_NUMBER" --auto --squash; then
+            enabled=$(gh pr view "$PR_NUMBER" --json state,autoMergeRequest --jq '.state == "MERGED" or .autoMergeRequest != null')
+            if [ "$enabled" != "true" ]; then
+              echo "::error::Could not enable auto-merge for fork data PR #$PR_NUMBER. Check repository auto-merge settings and the bot token, then rerun this workflow."
+              exit 1
+            fi
+          fi
       - name: Acknowledge commands
         uses: actions/github-script@v7
         env:

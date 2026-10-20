@@ -46,6 +46,7 @@ import {
   reportTitleId,
   reportTrusted,
 } from "./lib/status-issues.mjs";
+import { reportTrustSource, sourceReportTrusted } from "./lib/report-trust.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIR = path.join(ROOT, "src", "content", "compat");
@@ -323,7 +324,7 @@ for (const file of await readdir(DIR)) {
   const otherKey = reportTitleId(raw);
   const otherOs = reportOs(raw);
   if (otherKey && otherOs === os && gameKeyFor(otherKey, games) === gameKey) {
-    if (reportTrusted(raw)) existingTrusted = true;
+    if (sourceReportTrusted({ report: { trusted: reportTrusted(raw), trustSource: reportTrustSource(raw) }, sourceUrl })) existingTrusted = true;
     if (file !== `${slug}.md`) {
       await unlink(path.join(DIR, file));
       console.log(`[issue-to-compat] retired ${file} — same (game, OS), replaced by ${slug}.md`);

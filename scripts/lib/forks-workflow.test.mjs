@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mkdtemp, mkdir, writeFile, readFile, rm } from "node:fs/promises";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { tmpdir } from "node:os";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
@@ -98,6 +98,44 @@ async function run({
   }
 }
 describe("fork workflow integration", () => {
+  it.each(["true", "false"])(
+    "checks existing merge state after a failed auto-merge request (%s)",
+    async (enabled) => {
+      const workflow = parse(
+        await readFile(".github/workflows/community-forks.yml", "utf8"),
+      );
+      const step = workflow.jobs.update.steps.find(
+        (step) => step.name === "Enable merge after the checks pass",
+      );
+      // Exercise the workflow's real shell, with GitHub calls stubbed and no networking.
+      const shell =
+        process.platform === "win32"
+          ? "C:/Program Files/Git/bin/bash.exe"
+          : "bash";
+      const result = spawnSync(
+        shell,
+        [
+          "-e",
+          "-c",
+          `
+        gh() {
+          if [ "$1 $2" = "pr merge" ]; then return 1; fi
+          if [ "$1 $2" = "pr view" ]; then printf '%s\\n' '${enabled}'; return 0; fi
+          return 2;
+        }
+        ${step.run}
+      `,
+        ],
+        {
+          encoding: "utf8",
+          windowsHide: true,
+          env: { ...process.env, PR_NUMBER: "123" },
+        },
+      );
+      expect(result.error).toBeUndefined();
+      expect(result.status).toBe(enabled === "true" ? 0 : 1);
+    },
+  );
   it("runs the actual CLI with authenticated write permission and blocked external networking", async () => {
     const result = await run();
     expect(result.failed).toBe(false);

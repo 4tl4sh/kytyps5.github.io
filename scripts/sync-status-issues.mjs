@@ -70,6 +70,7 @@ import {
   titleIdKey,
   UPDATED_LABEL,
 } from "./lib/status-issues.mjs";
+import { reportTrustSource, sourceReportTrusted } from "./lib/report-trust.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const COMPAT_DIR = path.join(ROOT, "src", "content", "compat");
@@ -198,6 +199,7 @@ async function reportIndex() {
     reports.set(file.slice(0, -3), {
       title: reportTitle(raw),
       trusted: reportTrusted(raw),
+      trustSource: reportTrustSource(raw),
       titleId: reportTitleId(raw),
       os: reportOs(raw),
       status: reportStatus(raw),
@@ -309,6 +311,7 @@ for (const issue of candidates) {
   const isUpdate = Boolean(isNewerEdit && candStatus && (statusChanged || versionChanged));
 
   const mirrorOverrides = mirror ? readOverrides(mirror.body) : {};
+  const isReportTrusted = sourceReportTrusted({ override: mirrorOverrides.trusted, report, sourceUrl: issue.html_url });
   const baseBody = isUpdate
     ? buildUpdatedMirrorBody(
         issue.body,
@@ -335,25 +338,27 @@ for (const issue of candidates) {
     const bodyMatches = mirror.body === newBody;
     const titleMatches = mirror.title === newTitle;
 
-    // Closed mirrors are skipped unless an un-mirrored upstream update arrived,
-    // or a maintainer explicitly triggered a manual refresh with --issue-number.
-    if (mirror.state === "closed" && !issueNumber && (!isUpdate || bodyMatches)) {
-      skipped++;
-      continue;
-    }
-
     const existingLabels = new Set(mirror.labels ?? []);
     existingLabels.add(MIRROR_LABEL);
     if (isUpdate) existingLabels.add(UPDATED_LABEL);
-    if (mirrorOverrides.trusted === true) {
+    if (isReportTrusted) {
       existingLabels.add("trusted");
-    } else if (mirrorOverrides.trusted === false) {
+    } else {
       existingLabels.delete("trusted");
     }
 
     const labelsMatch =
       existingLabels.size === (mirror.labels ?? []).length &&
       (mirror.labels ?? []).every((l) => existingLabels.has(l));
+
+    // Reconcile trust on closed mirrors without reopening or rewriting them.
+    if (mirror.state === "closed" && !issueNumber && (!isUpdate || bodyMatches)) {
+      if (!labelsMatch) {
+        await patchIssue(mirror.number, { labels: Array.from(existingLabels) });
+        updated++;
+      } else skipped++;
+      continue;
+    }
 
     // Active patch is needed if fields/labels changed, if title changed on an open mirror,
     // if reopening a closed mirror on update, or if explicitly requested via --issue-number.
@@ -404,8 +409,6 @@ for (const issue of candidates) {
       }
 
       // Check if trusted
-      const isReportTrusted =
-        mirrorOverrides.trusted === true || (mirrorOverrides.trusted !== false && Boolean(report?.trusted));
       if (isReportTrusted && isSourceIssue) {
         const dedupKey = key || `mirror:${mirror.number}`;
         if (!seenGameUpdates.has(dedupKey)) {
@@ -441,7 +444,7 @@ for (const issue of candidates) {
   }
 
   const labels = isUpdate ? [MIRROR_LABEL, UPDATED_LABEL] : [MIRROR_LABEL];
-  if (report?.trusted) labels.push("trusted");
+  if (isReportTrusted) labels.push("trusted");
   await createIssue(newTitle, newBody, labels);
   created++;
   console.log(
