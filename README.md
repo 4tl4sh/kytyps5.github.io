@@ -34,6 +34,8 @@ Browser checks use the installed Chrome on Windows. Set `CHROME_PATH` for anothe
 
 ## Content and data
 
+Community patches and forks have their own [maintenance guide](docs/COMMUNITY_RESOURCES.md). Add patch packages under [`patches/<GAME_ID>/<Patch name>/`](patches/README.md). Collaborators manage fork listings through the dedicated `fork-management` issue using `/fork <URL> [game IDs]` and `/unfork <URL>`. A fork with no IDs targets no games. These resources appear in their directories and on associated game pages independently of compatibility reports.
+
 `src/data/games.json` remains the original full imported game catalog. Markdown reports in `src/content/compat/` remain authoritative. The original parser and status aggregation build `src/data/compat-index.json`, the slim enriched UI seed, and `public/data/compat-index.json`. `public/data/compat/` contains full report payloads. `public/data/catalog.json` contains the full catalog; it is fetched for untested detail routes. `src/data/aliases.json` preserves regional IDs and old report-slug links. `src/data/github.json` is the saved GitHub fallback; releases and community information refresh in the browser. `src/data/content.ts` preserves the factual setup, FAQ and contribution content.
 
 `npm run fetch:data` refreshes the GitHub fallback, `public/data/github.json` and the launcher's `public/data/updates.json` feed. `npm run export:site-compat` rebuilds the bundled game index, aliases, public runtime index, launcher compatibility feed, sitemap and robots file from the report/catalog files. Both run automatically before production builds. Failed GitHub requests preserve saved data; an optional build-only `GITHUB_TOKEN` supports authenticated requests.

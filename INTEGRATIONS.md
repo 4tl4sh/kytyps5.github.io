@@ -23,6 +23,10 @@ Baseline: upstream commit `8adc056` (2026-10-19). The redesign changes the prese
 
 ## Public contracts
 
+The added community-resource system has its own sources: `src/data/forks.json` and `patches/`. It exports `/data/community.json` and content-versioned ZIP downloads under `/patch-files/`. Neither report conversion nor report deletion writes these sources. Regional IDs resolve through the existing catalog. The original report and launcher schemas are unaffected.
+
+`community-forks.yml` accepts collaborator commands on the issue identified by `FORKS_ISSUE_NUMBER`, validates repository write access and fork lineage, and opens/updates `data/community-forks`. CI checks and the existing deployment flow publish its merged result. The new branch is included in CI's existing auto-deploy fallback. All original operational workflows other than that additive CI condition remain unchanged. See [community maintenance](docs/COMMUNITY_RESOURCES.md) for setup and command semantics.
+
 | Resource | Contract |
 | --- | --- |
 | `/data/github.json` | `generatedAt`, `repo`, `latestRelease`, `contributors`, `contributorsCount`, `commits` |

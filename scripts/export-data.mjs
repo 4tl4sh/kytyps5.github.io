@@ -1,8 +1,10 @@
 import { mkdir, readdir, unlink, writeFile } from "node:fs/promises";
 import { loadSiteData, buildSitemap } from "./lib/site-data.mjs";
+import { exportCommunityData } from "./lib/community-data.mjs";
 
 // Markdown and the imported catalog are authoritative; public JSON is output.
 const { games, aliases, details, gui, catalog, reports } = await loadSiteData();
+await exportCommunityData();
 await mkdir("public/data/compat", { recursive: true });
 for (const file of await readdir("public/data/compat")) {
   if (file.endsWith(".json") && !details[file.slice(0, -5)])

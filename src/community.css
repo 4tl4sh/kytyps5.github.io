@@ -1,0 +1,334 @@
+.community-directory {
+  padding-block: 48px 112px;
+}
+.community-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.community-toolbar .search-box {
+  flex: 1;
+  max-width: 620px;
+}
+.community-scope {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.community-scope > span {
+  color: var(--muted);
+  font-size: 14px;
+}
+.community-scope select {
+  min-height: 46px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--control-radius);
+  padding: 0 36px 0 14px;
+  font: inherit;
+}
+.community-results,
+.community-directory-note,
+.community-record-date {
+  color: var(--muted);
+}
+.community-results {
+  margin: 24px 0 36px;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.community-directory-note {
+  margin-top: 20px;
+  max-width: 75ch;
+}
+.community-empty {
+  padding: 40px;
+  background: var(--surface);
+}
+.community-empty h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 54px);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.community-empty p {
+  margin-bottom: 24px;
+  max-width: 65ch;
+}
+.community-feedback {
+  margin: 16px 0;
+  color: var(--muted);
+}
+.community-feedback .text-link {
+  margin-left: 8px;
+}
+.community-collection {
+  margin-block: 0 64px;
+}
+.community-game-heading {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+  min-width: 0;
+}
+.community-game-heading > img,
+.community-game-heading > .image-fallback {
+  width: 74px;
+  height: 100px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex: none;
+}
+.community-game-heading h2 {
+  font: 750 clamp(24px, 2.5vw, 34px)/1.2 var(--font-body);
+  margin-bottom: 10px;
+  overflow-wrap: anywhere;
+}
+.community-game-heading h2 a {
+  display: inline;
+}
+.community-game-heading h2 svg {
+  display: inline;
+  margin-left: 8px;
+}
+.community-game-heading p {
+  color: var(--muted);
+  font-size: 14px;
+}
+.community-patch {
+  padding: 28px 32px;
+  background: var(--surface);
+  margin-top: 16px;
+  min-width: 0;
+}
+.community-patch h3 {
+  font-size: 22px;
+  font-weight: 650;
+  margin-bottom: 16px;
+  overflow-wrap: anywhere;
+}
+.community-description {
+  max-width: 75ch;
+}
+.community-description h4,
+.community-description h5,
+.community-description h6 {
+  font: 650 19px/1.4 var(--font-body);
+  margin-block: 22px 12px;
+}
+.community-description img {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+}
+.community-description pre {
+  overflow: auto;
+  max-width: 100%;
+}
+.community-description table {
+  display: block;
+  max-width: 100%;
+  overflow: auto;
+}
+.community-downloads {
+  list-style: none;
+  padding: 0;
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+.community-downloads a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding-block: 8px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  overflow-wrap: anywhere;
+}
+.community-downloads svg {
+  flex: none;
+}
+.community-file-size {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.community-fork {
+  padding-block: 28px;
+}
+.community-fork + .community-fork {
+  margin-top: 12px;
+}
+.community-fork-title {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+.community-fork-title h3 {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 650;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.community-fork-title a {
+  display: inline;
+}
+.community-fork-title svg {
+  display: inline;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.community-fork > p {
+  max-width: 75ch;
+}
+.community-archived {
+  color: var(--muted);
+  font-size: 13px;
+  flex: none;
+}
+.community-record-date {
+  font-size: 13px;
+  margin-top: 16px;
+}
+.community-targets {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 18px;
+}
+.community-targets a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+.community-targets a > span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.community-targets a:hover,
+.community-fork-title a:hover,
+.community-game-heading a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.community-no-targets {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 18px;
+}
+.game-community-resources {
+  margin-top: 80px;
+  min-width: 0;
+}
+.community-section-intro h2 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4vw, 48px);
+  line-height: 1.08;
+  margin-bottom: 12px;
+}
+.community-section-intro > p {
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+.game-community-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.game-community-columns > section {
+  min-width: 0;
+}
+.community-subheading {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.community-subheading > h3 {
+  font-size: 20px;
+  font-weight: 650;
+}
+.community-subheading > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.game-community-columns .community-patch {
+  padding: 22px;
+}
+.game-community-columns .community-fork:first-child {
+  padding-top: 0;
+}
+.game-community-columns .community-fork-title h3 {
+  font-size: 20px;
+}
+@media (max-width: 900px) {
+  .game-community-columns {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+@media (max-width: 600px) {
+  .community-directory {
+    padding-block: 28px 72px;
+  }
+  .community-toolbar {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .community-toolbar .search-box {
+    flex-basis: 100%;
+    max-width: none;
+  }
+  .community-scope {
+    justify-content: space-between;
+    width: 100%;
+  }
+  .community-empty {
+    padding: 28px 22px;
+  }
+  .community-game-heading {
+    gap: 18px;
+  }
+  .community-game-heading > img,
+  .community-game-heading > .image-fallback {
+    width: 60px;
+    height: 80px;
+  }
+  .community-game-heading h2 {
+    font-size: 24px;
+  }
+  .community-patch {
+    padding: 24px 20px;
+  }
+  .community-fork-title {
+    flex-wrap: wrap;
+  }
+  .community-downloads {
+    display: block;
+  }
+  .community-subheading {
+    flex-wrap: wrap;
+  }
+  .game-community-resources {
+    margin-top: 56px;
+  }
+}

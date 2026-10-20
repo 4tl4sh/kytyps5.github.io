@@ -88,6 +88,8 @@ export function buildSitemap(games) {
     ["/", "weekly", "1.0"],
     ["/download", "daily", "0.9"],
     ["/compatibility", "weekly", "0.8"],
+    ["/patches", "weekly", "0.7"],
+    ["/forks", "weekly", "0.7"],
     ["/docs", "weekly", "0.8"],
     ["/faq", "monthly", "0.7"],
     ["/contributing", "monthly", "0.6"],

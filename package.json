@@ -13,8 +13,10 @@
     "validate:compat": "node scripts/validate-compat.mjs",
     "import": "node scripts/import-games.mjs",
     "export:compat": "node scripts/export-compat-json.mjs --pretty",
+    "export:community": "node scripts/export-community.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "test:unit": "vitest run",
+    "test:community": "vitest run scripts/lib/community.test.mjs scripts/lib/forks-workflow.test.mjs",
     "test:ci": "node scripts/verify-ci.mjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1 --port 5173",
@@ -26,6 +28,7 @@
     "test:functionality": "node scripts/verify-functionality.mjs",
     "test:audit-fixes": "node scripts/verify-audit-fixes.mjs",
     "test:featured": "node scripts/verify-featured.mjs",
+    "test:community-ui": "node scripts/verify-community.mjs",
     "format": "prettier --write \"src/**/*.tsx\" \"src/**/*.ts\" \"src/*.css\" \"scripts/*.mjs\" vite.config.ts index.html"
   },
   "dependencies": {

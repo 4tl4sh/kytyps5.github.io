@@ -22,6 +22,10 @@ const descriptions: Record<string, string> = {
     "Download KytyPS5 for Windows, Linux and macOS, check requirements and build the emulator from source.",
   "/compatibility":
     "Search tested PS5 games, filter compatibility by platform and status, and read the original community reports.",
+  "/patches":
+    "Browse community patches for PS5 games, read installation instructions and download patch packages for KytyPS5.",
+  "/forks":
+    "Explore community forks of KytyPS5 and the specific games each fork targets.",
   "/docs":
     "Quick Start: download, extract, add games, configure settings, apply patches and run KytyPS5. Full installation and build documentation follows.",
   "/faq":
