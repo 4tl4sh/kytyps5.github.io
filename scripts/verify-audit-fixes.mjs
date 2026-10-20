@@ -10,6 +10,12 @@ await fs.mkdir(evidence, { recursive: true });
 const index = JSON.parse(
   await fs.readFile("public/data/compat-index.json", "utf8"),
 );
+const nextTestDate = new Date(
+  Math.max(...index.games.map((game) => Date.parse(game.latestTested))) +
+    86_400_000,
+)
+  .toISOString()
+  .slice(0, 10);
 const astro = JSON.parse(
   await fs.readFile("public/data/compat/PPSA21564.json", "utf8"),
 );
@@ -280,15 +286,15 @@ try {
       };
       changed.overall = "logo";
       changed.reportRevision = "new-revision";
-      changed.latestTested = "2026-10-20";
-      changed.latestReport = { os: "windows", testedDate: "2026-10-20" };
+      changed.latestTested = nextTestDate;
+      changed.latestReport = { os: "windows", testedDate: nextTestDate };
       for (const capture of changed.screenshots)
-        capture.testedDate = "2026-10-20";
+        capture.testedDate = nextTestDate;
       const detail = structuredClone(astro);
       for (const report of detail.reports) {
         report.status = changed.os[report.os];
         report.notes = "FRESH REPORT CONTENT";
-        report.testedDate = "2026-10-20";
+        report.testedDate = nextTestDate;
       }
       await page.route("**/data/compat-index.json", (route) =>
         route.fulfill({ json: phase ? next : starting }),

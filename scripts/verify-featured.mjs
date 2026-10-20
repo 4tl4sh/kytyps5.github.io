@@ -6,6 +6,12 @@ const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:5173";
 const index = JSON.parse(
   await fs.readFile("public/data/compat-index.json", "utf8"),
 );
+const nextTestDate = new Date(
+  Math.max(...index.games.map((game) => Date.parse(game.latestTested))) +
+    86_400_000,
+)
+  .toISOString()
+  .slice(0, 10);
 const browser = await chromium.launch({
   executablePath:
     process.env.CHROME_PATH ??
@@ -40,15 +46,15 @@ try {
     });
   }
   const game = next.games.find((g) => g.key === "PPSA21564");
-  game.latestTested = "2026-10-20";
-  game.latestReport = { os: "macos", testedDate: "2026-10-20" };
+  game.latestTested = nextTestDate;
+  game.latestReport = { os: "macos", testedDate: nextTestDate };
   game.os.macos = "doesnt-boot";
   game.overall = "in-game"; // Latest macOS report differs from best overall progress.
   game.screenshots = [
     {
       title: game.title,
       screenshot: `${base}/images/kitty-still-v2.png`,
-      testedDate: "2026-10-20",
+      testedDate: nextTestDate,
       os: "macos",
     },
   ];
@@ -128,7 +134,7 @@ try {
   );
   assert.equal(
     await card.locator("time").getAttribute("datetime"),
-    "2026-10-20",
+    nextTestDate,
   );
   await page.locator(".capture-selector button").first().waitFor();
   assert.equal(

@@ -10,6 +10,8 @@ Read-only GitHub inspection confirms all seven original workflows are active, th
 
 The extended theme/navigation regression exposed an exit-animation wait that could retain the previous route during rapid navigation. Routes now replace their content immediately and retain a short entrance fade, with immediate reduced-motion rendering. The targeted regression passes. Browser assertions wait for rendered filter state as well as the updated URL. Offline tests use a controlled cross-origin image to verify opaque-response caching without depending on an external artwork host's availability.
 
+The complete `npm run test:ci` rerun passes: eight general journey groups, live API/history/Quick Start checks, report/cache/scroll regressions, featured selection, both themes, the physical hero deck, production offline caching and original-system parity. The local run reused the existing development server using `KYTY_REUSE_DEV_SERVER=true`; CI starts its own servers. Synthetic latest-report fixtures advance relative to the exported data so future real reports do not make the tests stale.
+
 ## Latest featured reports
 
 Featured selection now excludes missing and blank cover-art URLs before taking nine titles. The featured browser regression injects newer titles without artwork and verifies they are absent while both the hero and featured carousel still contain nine games in date order. Captures continue to use their independent screenshot/report ordering.
