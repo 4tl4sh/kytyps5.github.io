@@ -125,7 +125,7 @@ jobs:
 
   auto-deploy:
     needs: [test]
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (startsWith(github.head_ref, 'compat/') || github.head_ref == 'data/games-refresh')
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && (startsWith(github.head_ref, 'compat/') || github.head_ref == 'data/games-refresh' || github.head_ref == 'data/community-forks')
     runs-on: ubuntu-latest
     steps:
       - name: Trigger deploy if auto-merged

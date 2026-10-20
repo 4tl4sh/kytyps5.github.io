@@ -1,5 +1,13 @@
 # Verification
 
+## Community patches and forks
+
+Added independent patch/fork directories and per-game resources without changing report storage, status aggregation, launcher feed schemas or existing report commands. The fork workflow restricts changes to write/maintain/admin collaborators on one configured issue, replays queued commands in order and preserves changes already waiting in its data PR. Forks with no game targets never appear on game pages. Patch folders, descriptions and ZIPs are validated and exported during the normal build.
+
+All 192 unit tests pass, including 30 community export/command/workflow tests. The complete `npm run test:ci` pipeline passes with the new community browser checks alongside every existing journey, data, animation, offline and original-system parity check. The final production build and typecheck pass; the existing bundle-size advisory remains. Browser fixtures exercise populated data without adding fictional production listings.
+
+The requested independent review found two edge cases, both fixed and verified: resources for an uncataloged title survive removal of its final report and subsequent reload; adjacent Markdown ZIP links support `./` and encoded filenames while excluding traversal/nested-path matches. The targeted browser rerun also verifies actual ZIP bytes, all packages, regional game associations, platform/report changes, search/filter controls, error recovery, documentation and 1440/768/390px layouts in both themes. The reviewer's targeted verdict is **ship**, with both findings resolved. Captures are in `.impeccable/review/community/`.
+
 ## Original-system parity
 
 Compared against upstream `8adc056`. The original issue-mirroring, report-conversion, override, scheduled GitHub refresh and Pages deployment workflows and their operational helpers are retained unchanged. CI adds browser coverage; weekly catalog PRs also include generated aliases. The full catalog and all Markdown reports remain authoritative. The frontend export uses the original parser and status aggregation, with additive freshness, metadata and screenshot fields.

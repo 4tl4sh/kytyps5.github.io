@@ -130,6 +130,7 @@ export const DOC_SECTIONS = [
   { id: "build", label: "Building from source" },
   { id: "dependencies", label: "Dependencies" },
   { id: "running", label: "Running" },
+  { id: "community-resources", label: "Patches and forks" },
   { id: "troubleshooting", label: "Troubleshooting" },
   { id: "contributing", label: "Contributing" },
   { id: "repository", label: "Repository links" },

@@ -51,7 +51,9 @@ import { CompatibilitySummary } from "../components/compatibility-summary";
 import { cachedJson } from "../lib/cache";
 import { pageMetadata } from "../lib/page-metadata";
 import { LoadingState } from "../components/loading-state";
+import { GameCommunityResources } from "../components/community-resources";
 import { useGameReports } from "../hooks/use-game-reports";
+import { useCommunityResources } from "../hooks/use-community-resources";
 import { reportSummary } from "../lib/game-status";
 import { useCompatibilityGames } from "../hooks/use-compatibility-games";
 import {
@@ -135,6 +137,7 @@ type CatalogEntry = {
   genres?: string[];
 };
 function CatalogGamePage({ titleKey }: { titleKey: string }) {
+  const resources = useCommunityResources();
   const [catalogGame, setCatalogGame] = useState<CatalogEntry | null>(null),
     [loading, setLoading] = useState(true),
     [error, setError] = useState(false),
@@ -180,19 +183,63 @@ function CatalogGamePage({ titleKey }: { titleKey: string }) {
       current = false;
     };
   }, [titleKey, attempt]);
-  if (loading) return <LoadingState label="Looking up this title…" route />;
-  if (!catalogGame)
+  const normalizedKey = titleKey.toUpperCase().replaceAll("-", "");
+  const resourceGame = [
+    ...(resources.data?.patchCollections.map((collection) => collection.game) ??
+      []),
+    ...(resources.data?.forks
+      .filter((fork) => fork.targetTitleIds.length > 0)
+      .flatMap((fork) => fork.games) ?? []),
+  ].find(
+    (game) => game.key === normalizedKey || game.titleId === normalizedKey,
+  );
+  const entry =
+    catalogGame ??
+    (resourceGame
+      ? {
+          titleId: resourceGame.key,
+          allTitleIds: [...new Set([resourceGame.key, resourceGame.titleId])],
+          name: resourceGame.title,
+          cover: resourceGame.cover,
+        }
+      : null);
+  useEffect(() => {
+    if (!catalogGame && resourceGame)
+      pageMetadata(
+        `/game/${encodeURIComponent(titleKey)}`,
+        `${resourceGame.title} compatibility`,
+        `Community resources and reporting options for ${resourceGame.title}.`,
+        {
+          noindex: true,
+          image: resourceGame.cover,
+          canonicalPath: `/game/${encodeURIComponent(resourceGame.key)}`,
+        },
+      );
+  }, [catalogGame, resourceGame, titleKey]);
+  if (loading || (!entry && !resources.data && !resources.error))
+    return <LoadingState label="Looking up this title…" route />;
+  if (!entry)
     return (
       <section className="wrap empty-state route-empty">
         <FileText size={40} />
-        <h1>{error ? "Catalog couldn’t load." : "Game not found."}</h1>
+        <h1>
+          {error || resources.error
+            ? "Title lookup couldn’t load."
+            : "Game not found."}
+        </h1>
         <p>
-          {error
-            ? "The title database is temporarily unavailable. Try loading it again."
-            : "This title ID is not in the game catalog."}
+          {error || resources.error
+            ? "The title database or community resources are temporarily unavailable. Try loading them again."
+            : "This title ID is not in the game catalog or community resources."}
         </p>
-        {error && (
-          <button className="button" onClick={() => setAttempt((n) => n + 1)}>
+        {(error || resources.error) && (
+          <button
+            className="button"
+            onClick={() => {
+              setAttempt((n) => n + 1);
+              void resources.refresh(true);
+            }}
+          >
             Try again
           </button>
         )}
@@ -209,13 +256,13 @@ function CatalogGamePage({ titleKey }: { titleKey: string }) {
         The compatibility collection
       </CollectionBackLink>
       <div className="game-detail-heading">
-        <GameImage src={catalogGame.cover} title={catalogGame.name} eager />
+        <GameImage src={entry.cover} title={entry.name} eager />
         <div>
           <span className="status status-doesnt-boot">Untested</span>
-          <h1>{catalogGame.name}</h1>
-          <CatalogMetadata game={catalogGame} />
+          <h1>{entry.name}</h1>
+          <CatalogMetadata game={entry} />
           <External
-            href={`${reportUrl}&title=${encodeURIComponent(`Game Emulation Status Report: ${catalogGame.name}`)}`}
+            href={`${reportUrl}&title=${encodeURIComponent(`Game Emulation Status Report: ${entry.name}`)}`}
             className="button"
           >
             Submit the first report
@@ -234,6 +281,7 @@ function CatalogGamePage({ titleKey }: { titleKey: string }) {
           </p>
         </div>
       </div>
+      <GameCommunityResources gameKey={entry.titleId} />
     </section>
   );
 }
@@ -696,6 +744,7 @@ export function GamePage() {
           <ArrowLeft size={17} />
           Back to compatibility
         </CollectionBackLink>
+        <GameCommunityResources gameKey={game.key} />
       </section>
     );
   const reports = data?.reports.filter((r) => r.os === os) ?? [];
@@ -871,6 +920,7 @@ export function GamePage() {
           )}
         </div>
       </div>
+      <GameCommunityResources gameKey={game.key} />
     </section>
   );
 }

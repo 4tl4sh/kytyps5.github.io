@@ -60,6 +60,7 @@ try {
     "verify-functionality",
     "verify-audit-fixes",
     "verify-featured",
+    "verify-community",
     "verify-enhancements",
     "verify-hero-deck",
     "verify-cache-ripple",

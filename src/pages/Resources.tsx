@@ -51,6 +51,7 @@ import { osNames, repoUrl, reportUrl, type OS } from "../data/types";
 import { releaseAsset } from "../lib/github";
 import { QuickStart } from "../components/quick-start";
 import { KittyAnimation } from "../components/loading-state";
+import { forkManagementUrl, websiteRepo } from "../data/community-types";
 
 const osKeys = Object.keys(osNames) as OS[];
 const buildNotes: Record<OS, string> = {
@@ -426,6 +427,70 @@ export function Documentation() {
                 'SDL_VULKAN_LIBRARY="$PWD/libMoltenVK.dylib" ./kyty_emulator --game "/games/ExampleGame"',
               ]}
             />
+          </DocSection>
+          <DocSection
+            id="community-resources"
+            title="Patches and community forks"
+          >
+            <p>
+              Find game-specific fixes in the{" "}
+              <Link to="/patches">patches directory</Link> and alternative
+              builds in <Link to="/forks">community forks</Link>. A game page
+              lists its associated resources separately from test reports, so a
+              report update does not remove them.
+            </p>
+            <p>
+              Read each patch’s description for its supported game version,
+              emulator build and installation steps, then download the related
+              ZIP package. Forks appear on game pages only when a maintainer
+              explicitly lists those game IDs. A fork with no targets is
+              available in the forks directory and is associated with no games.
+            </p>
+            <h3>For maintainers</h3>
+            <p>
+              Repository collaborators with write access can add or update a
+              fork on the{" "}
+              <External href={forkManagementUrl}>
+                fork-management issue
+              </External>
+              :
+            </p>
+            <CodeBlock
+              title="Fork commands"
+              code={[
+                "/fork https://github.com/OWNER/REPOSITORY PPSA21567 PPSA21564",
+                "/fork https://github.com/OWNER/REPOSITORY",
+                "/unfork https://github.com/OWNER/REPOSITORY",
+              ]}
+            />
+            <p>
+              The first command lists game targets. The second lists a fork with
+              no targets, clearing an existing target list. The third removes
+              the fork. Commands open or update a checked data PR; publication
+              follows its merge.
+            </p>
+            <p>For patches, add files manually to the website repository:</p>
+            <CodeBlock
+              title="Patch source layout"
+              code={[
+                "patches/PPSA21567/Patch name/description.md",
+                "patches/PPSA21567/Patch name/patch.zip",
+                "patches/PPSA21567/Patch name/optional-second-package.zip",
+              ]}
+            />
+            <p>
+              Each named patch needs a description and at least one ZIP. See the{" "}
+              <External
+                href={`${websiteRepo}/blob/main/docs/COMMUNITY_RESOURCES.md`}
+              >
+                maintenance guide
+              </External>{" "}
+              and{" "}
+              <External href={`${websiteRepo}/blob/main/patches/README.md`}>
+                patch instructions
+              </External>{" "}
+              for the full process.
+            </p>
           </DocSection>
           <DocSection id="troubleshooting" title="Troubleshooting">
             <FAQAccordion

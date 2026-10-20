@@ -10,6 +10,7 @@ import "./enhancements.css";
 import "./hero-deck.css";
 import "./theme-ripple.css";
 import "./feature-updates.css";
+import "./community.css";
 import { registerAssetCache } from "./lib/service-worker";
 
 registerAssetCache();

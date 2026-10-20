@@ -6,6 +6,7 @@ dist/
 .impeccable/
 public/data/
 public/sitemap.xml
+public/patch-files/
 .env
 .env.*
 !.env.example

@@ -45,16 +45,24 @@ const Contributing = lazy(() =>
 const NotFound = lazy(() =>
   import("./pages/Resources").then((m) => ({ default: m.NotFound })),
 );
+const Patches = lazy(() =>
+  import("./pages/Community").then((m) => ({ default: m.Patches })),
+);
+const Forks = lazy(() =>
+  import("./pages/Community").then((m) => ({ default: m.Forks })),
+);
 
 const navigation = [
   { label: "Compatibility", to: "/compatibility" },
+  { label: "Patches", to: "/patches" },
+  { label: "Forks", to: "/forks" },
   { label: "Documentation", to: "/docs" },
-  { label: "Contribute", to: "/contributing" },
-  { label: "About", to: "/about" },
 ];
 const allNavigation = [
   { label: "Download", to: "/download" },
   ...navigation,
+  { label: "Contribute", to: "/contributing" },
+  { label: "About", to: "/about" },
   { label: "FAQ", to: "/faq" },
 ];
 
@@ -262,6 +270,8 @@ export default function App() {
         "/": "Beyond the console",
         "/download": "Download",
         "/compatibility": "Game compatibility",
+        "/patches": "Community patches",
+        "/forks": "Community forks",
         "/docs": "Documentation",
         "/faq": "Frequently asked questions",
         "/about": "About",
@@ -295,6 +305,8 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/download" element={<DownloadPage />} />
             <Route path="/compatibility" element={<Compatibility />} />
+            <Route path="/patches" element={<Patches />} />
+            <Route path="/forks" element={<Forks />} />
             <Route path="/game/:key" element={<GamePage />} />
             <Route path="/docs" element={<Documentation />} />
             <Route path="/faq" element={<FAQ />} />

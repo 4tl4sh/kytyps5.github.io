@@ -1,0 +1,87 @@
+name: Manage community forks
+
+on:
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/community-forks.yml"
+      - "scripts/manage-forks.mjs"
+      - "scripts/lib/forks.mjs"
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: write
+
+# Each run replays all commands after the stored cursor, including pending ones.
+concurrency:
+  group: community-forks
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: >-
+      vars.FORKS_ISSUE_NUMBER != '' &&
+      (github.event_name != 'issue_comment' ||
+       (github.event.issue.pull_request == null &&
+        github.event.issue.number == fromJSON(vars.FORKS_ISSUE_NUMBER) &&
+        (startsWith(github.event.comment.body, '/fork ') || startsWith(github.event.comment.body, '/unfork ')) &&
+        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Reconcile authorized fork commands
+        env:
+          GH_TOKEN: ${{ secrets.ACTIONS_BOT_TOKEN || secrets.GITHUB_TOKEN }}
+          FORKS_ISSUE_NUMBER: ${{ vars.FORKS_ISSUE_NUMBER }}
+          FORK_RESULTS_PATH: ${{ runner.temp }}/fork-results.json
+        run: node scripts/manage-forks.mjs
+      - name: Validate registry, patch exports and command behavior
+        run: |
+          npm run test:community
+          npm run export:community
+      - name: Open or update the fork data PR
+        id: pr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.ACTIONS_BOT_TOKEN || secrets.GITHUB_TOKEN }}
+          add-paths: src/data/forks.json
+          branch: data/community-forks
+          delete-branch: true
+          commit-message: "data: update community forks"
+          title: "data: update community forks"
+          body: |
+            Updates the independent community fork registry from authorized commands on the management issue. An empty target list applies to no game.
+      - name: Enable merge after the checks pass
+        if: steps.pr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.ACTIONS_BOT_TOKEN || secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.pr.outputs.pull-request-number }}
+        run: gh pr merge "$PR_NUMBER" --auto --squash || echo "Auto-merge unavailable; merge the data PR after its checks pass."
+      - name: Acknowledge commands
+        uses: actions/github-script@v7
+        env:
+          PR_URL: ${{ steps.pr.outputs.pull-request-url }}
+          FORK_RESULTS_PATH: ${{ runner.temp }}/fork-results.json
+          FORKS_ISSUE_NUMBER: ${{ vars.FORKS_ISSUE_NUMBER }}
+        with:
+          github-token: ${{ secrets.ACTIONS_BOT_TOKEN || secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('node:fs');
+            const results = JSON.parse(fs.readFileSync(process.env.FORK_RESULTS_PATH, 'utf8'));
+            for (const result of results) {
+              await github.rest.reactions.createForIssueComment({ ...context.repo, comment_id: result.commentId, content: result.ok ? 'eyes' : 'confused' });
+              const suffix = result.ok && process.env.PR_URL ? ` Tracked in ${process.env.PR_URL}; publication follows a successful merge.` : '';
+              await github.rest.issues.createComment({ ...context.repo, issue_number: Number(process.env.FORKS_ISSUE_NUMBER), body: `${result.ok ? 'Accepted' : 'Could not apply'}: ${result.message}${suffix}` });
+            }
