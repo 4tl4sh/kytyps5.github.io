@@ -46,10 +46,10 @@ export function forkRepository(value) {
 
 export function parseForkCommand(body) {
   const line = String(body).split(/\r?\n/)[0].trim();
-  const match = line.match(/^\/(fork|unfork)\s+(\S+)(?:\s+(.*))?$/i);
+  const match = line.match(/^\/(fork|unfork|force)\s+(\S+)(?:\s+(.*))?$/i);
   if (!match)
     throw new Error(
-      "Use /fork <GitHub URL> [PPSA12345 PPSA67890], or /unfork <GitHub URL>.",
+      "Use /fork <GitHub URL> [PPSA12345 PPSA67890], /force <GitHub URL> [game IDs] to override fork lineage, or /unfork <GitHub URL>.",
     );
   const repository = forkRepository(match[2]);
   const ids = (match[3] ?? "").trim();
@@ -60,7 +60,13 @@ export function parseForkCommand(body) {
     : [];
   if (targetTitleIds.length > 100)
     throw new Error("A fork can list at most 100 game IDs.");
-  return { command: match[1].toLowerCase(), repository, targetTitleIds };
+  const forced = match[1].toLowerCase() === "force";
+  return {
+    command: forced ? "fork" : match[1].toLowerCase(),
+    repository,
+    targetTitleIds,
+    ...(forced ? { force: true } : {}),
+  };
 }
 
 export function validateForkRegistry(value) {
@@ -83,7 +89,9 @@ export function validateForkRegistry(value) {
       !Array.isArray(fork.targetTitleIds) ||
       fork.targetTitleIds.length > 100 ||
       typeof fork.description !== "string" ||
-      typeof fork.updatedAt !== "string"
+      typeof fork.updatedAt !== "string" ||
+      (fork.lineageOverride !== undefined &&
+        typeof fork.lineageOverride !== "boolean")
     )
       throw new Error(`Invalid fork entry: ${fork.repository ?? "unknown"}.`);
     fork.targetTitleIds.forEach(titleId);
@@ -115,14 +123,22 @@ export function applyForkCommand(
       );
     next.forks.splice(existing, 1);
   } else {
+    if (
+      !repository ||
+      repository.private ||
+      !Number.isSafeInteger(repository.id) ||
+      repository.id <= 0
+    )
+      throw new Error("Provide an existing public GitHub repository.");
     const project =
       repository?.source?.full_name ?? repository?.parent?.full_name;
     if (
-      !repository?.fork ||
-      project?.toLowerCase() !== UPSTREAM.toLowerCase() ||
-      !Number.isSafeInteger(repository.id)
+      command.force !== true &&
+      (!repository.fork || project?.toLowerCase() !== UPSTREAM.toLowerCase())
     )
-      throw new Error(`The repository must be a GitHub fork of ${UPSTREAM}.`);
+      throw new Error(
+        `The repository must be a GitHub fork of ${UPSTREAM}. To approve a standalone mirror, use /force <GitHub URL> [game IDs].`,
+      );
     const canonical = forkRepository(
       `https://github.com/${repository.full_name}`,
     );
@@ -139,6 +155,7 @@ export function applyForkCommand(
       addedBy: previous?.addedBy ?? comment.user.login,
       sourceCommentId: comment.id,
       sourceUrl: `https://github.com/${comment.siteRepository}/issues/${issueNumber}#issuecomment-${comment.id}`,
+      ...(command.force === true ? { lineageOverride: true } : {}),
     };
     if (existing < 0) next.forks.push(entry);
     else next.forks[existing] = entry;
@@ -164,7 +181,7 @@ export async function reconcileForkComments(
     if (!Number.isSafeInteger(comment.id) || !comment.user?.login)
       throw new Error("Invalid issue comment from GitHub.");
     const line = String(comment.body ?? "").trim();
-    if (/^\/(?:fork|unfork)(?:\s|$)/i.test(line)) {
+    if (/^\/(?:fork|unfork|force)(?:\s|$)/i.test(line)) {
       const login = comment.user.login;
       if (!permissions.has(login))
         permissions.set(login, await permission(login));
@@ -185,7 +202,7 @@ export async function reconcileForkComments(
           outcomes.push({
             commentId: comment.id,
             ok: true,
-            message: `${command.repository}: ${command.command === "unfork" ? "removed" : command.targetTitleIds.length ? `targets ${command.targetTitleIds.join(", ")}` : "listed without game targets"}.`,
+            message: `${command.repository}: ${command.command === "unfork" ? "removed" : command.targetTitleIds.length ? `targets ${command.targetTitleIds.join(", ")}` : "listed without game targets"}${command.force ? " (fork lineage overridden)" : ""}.`,
           });
         } catch (error) {
           // A service outage is retryable; never advance past an unprocessed command.

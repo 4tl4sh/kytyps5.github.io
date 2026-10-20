@@ -18,7 +18,21 @@ Bracketed IDs are accepted too:
 /fork https://github.com/OWNER/REPOSITORY [PPSA21564] [PPSA21567]
 ```
 
-Each URL must link to a repository in the GitHub fork network of `KytyPS5/KytyPS5`. Branch/release links, private repositories, other projects and invalid serials are rejected. The stored URL is the canonical repository URL. IDs normalize to bare uppercase `PPSA12345`; duplicates are removed. Unknown valid IDs can be recorded before the catalog knows them.
+By default, each URL must link to a repository in the GitHub fork network of `KytyPS5/KytyPS5`. Branch/release links, private repositories, other projects and invalid serials are rejected. The stored URL is the canonical repository URL. IDs normalize to bare uppercase `PPSA12345`; duplicates are removed. Unknown valid IDs can be recorded before the catalog knows them.
+
+### Approve a standalone mirror
+
+If GitHub does not identify a community build as part of that fork network, a collaborator with write, maintain or admin access can explicitly bypass the lineage restriction:
+
+```text
+/force https://github.com/OWNER/REPOSITORY PPSA21564 PPSA21567
+```
+
+Post this as a **new comment on the management issue**, with the repository URL and its complete game target list. GitHub issue comments do not identify a reply target, so `/force` alone does not select an error or retry an earlier command. Copy the original `/fork` command and replace `/fork` with `/force`.
+
+This bypasses only GitHub fork lineage. The repository must still be public and exist, the URL and game IDs must be valid, and the main KytyPS5 repository itself cannot be listed. The registry records `lineageOverride: true` with the command's date and source comment; `addedBy` retains the listing's original author. Forced listings use the same checked, auto-merging data PR and Pages publication flow as ordinary listings. Use `/force` again when updating a standalone mirror; ordinary `/fork` continues to enforce lineage. `/unfork` removes either kind normally.
+
+### Game targets and removal
 
 An omitted game list means **no game targets**:
 

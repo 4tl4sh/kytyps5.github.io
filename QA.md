@@ -1,5 +1,11 @@
 # Verification
 
+## Explicit fork-lineage override
+
+All 229 unit tests pass, including 44 community tests. The new `/force <URL> [game IDs]` cases first reproduced the missing command behavior in the actual command CLI and reconciliation pipeline. Tests now verify an authorized standalone listing, rejected ordinary `/fork` submissions, read/triage permission denial, public-repository and metadata validation, malformed URLs/IDs, explicit target retention, no implicit game targets and ordinary removal. The registry records the lineage override with its command provenance. Workflow validation checks that `/force` is admitted only through the existing management-issue/collaborator gate.
+
+The authenticated production build, typecheck, report validation and original-system API/feed/catalog/sitemap parity checks pass. Live publication was separately verified after data PR #938 auto-merged and its Pages deployment succeeded: `/data/community.json` contains `chenxiao07/KytyPS5`, and a fresh real Chrome session renders “1 fork” on the published `/forks` page without runtime errors. The earlier zero count reflected the data PR awaiting checks/merge; no production listing was hard-coded or injected by the tests.
+
 ## Source-specific trust and fork auto-merge
 
 All 217 unit tests pass. Regression tests reproduced the original trust inheritance in both the actual poller and converter before the fix. Isolated CLI tests now verify new-source reports start untrusted, explicit approvals/revocations win, same-source updates retain automatic conversion, another repository's issue number cannot supply approval, and closed-mirror label corrections do not reopen issues. Additional tests prevent upstream `Overrides` text and report-body `trusted: true` text from granting approval, and ensure maintainer commands preserve the real source footer.

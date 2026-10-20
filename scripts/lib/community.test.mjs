@@ -87,6 +87,74 @@ afterEach(async () => {
 });
 
 describe("collaborator fork commands", () => {
+  it("bypasses only fork lineage when an authorized /force command is replayed", async () => {
+    const standalone = { ...metadata, fork: false, source: undefined };
+    const options = {
+      issueNumber: 9,
+      siteRepository: "fixture/site",
+      permission: async () => "write",
+      repository: async () => standalone,
+    };
+    const rejected = await reconcileForkComments(empty(), [comment], options);
+    expect(rejected.registry.forks).toEqual([]);
+    expect(rejected.outcomes[0].ok).toBe(false);
+    const forced = await reconcileForkComments(
+      rejected.registry,
+      [{ ...comment, id: 11, body: comment.body.replace("/fork", "/force") }],
+      options,
+    );
+    expect(forced.outcomes[0]?.ok).toBe(true);
+    expect(forced.registry.forks[0]?.lineageOverride).toBe(true);
+    expect(forced.registry.forks[0]?.targetTitleIds).toEqual(["PPSA00002"]);
+    expect(forced.registry.forks[0]?.sourceCommentId).toBe(11);
+  });
+  it("still rejects private or invalid repository metadata when forced", async () => {
+    const options = {
+      issueNumber: 9,
+      siteRepository: "fixture/site",
+      permission: async () => "admin",
+    };
+    for (const repository of [
+      { ...metadata, private: true },
+      { ...metadata, id: -1 },
+    ]) {
+      const result = await reconcileForkComments(
+        empty(),
+        [{ ...comment, body: comment.body.replace("/fork", "/force") }],
+        { ...options, repository: async () => repository },
+      );
+      expect(result.registry.forks).toEqual([]);
+      expect(result.outcomes[0]?.ok).toBe(false);
+    }
+  });
+  it("a forced listing with no game IDs targets no games and can be removed normally", () => {
+    const forced = applyForkCommand(
+      empty(),
+      parseForkCommand("/force https://github.com/Tester/KytyPS5"),
+      { ...metadata, fork: false, source: undefined },
+      comment,
+      9,
+    );
+    expect(forced.forks[0].targetTitleIds).toEqual([]);
+    const removed = applyForkCommand(
+      forced,
+      parseForkCommand("/unfork https://github.com/Tester/KytyPS5"),
+      null,
+      comment,
+      9,
+    );
+    expect(removed.forks).toEqual([]);
+  });
+  it.each([
+    "/force",
+    "/force https://github.com/KytyPS5/KytyPS5",
+    "/force http://github.com/a/repo",
+    "/force https://github.com/a/repo/tree/main",
+    "/force https://github.com/a/repo?token=oops",
+    "/force https://github.com/a/repo INVALID",
+  ])("retains command validation for %s", (command) =>
+    expect(() => parseForkCommand(command)).toThrow(),
+  );
   it("accepts optional bracketed IDs, normalizes regional IDs and deduplicates", () => {
     expect(
       parseForkCommand(
