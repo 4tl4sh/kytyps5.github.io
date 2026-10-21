@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "throughCommit": "0d782944b2e08e64240ba926e5705c02d898fd00",
+  "throughCommit": "a0b3212331d0e4fe02ea83aa581a29d876d6e596",
   "games": {
     "PPSA01284": {
       "windows": {
@@ -471,12 +471,12 @@
     "PPSA02176": {
       "windows": {
         "slug": "tony-hawk-s-pro-skater-1-2-windows",
-        "titleId": "PPSA02177",
+        "titleId": "PPSA02176",
         "os": "windows",
-        "status": "logo",
-        "testedDate": "2026-10-09",
-        "testedVersion": "v0.3.0",
-        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/51aa4e921349d83a941be8fc2bf406a6529f990b/src/content/compat/tony-hawk-s-pro-skater-1-2-windows.md"
+        "status": "in-game",
+        "testedDate": "2026-10-19",
+        "testedVersion": "2026-10-19-0cad467-Linux-x86_64 / 2026-10-19 Windows Version",
+        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/9f964a9ffa75678ad4dbe65b6be21c68eacffc51/src/content/compat/tony-hawk-s-pro-skater-1-2-windows.md"
       }
     },
     "PPSA02198": {
@@ -887,12 +887,12 @@
       },
       "windows": {
         "slug": "the-callisto-protocol-windows",
-        "titleId": "PPSA03351",
+        "titleId": "PPSA03352",
         "os": "windows",
-        "status": "doesnt-boot",
-        "testedDate": "2026-07-18",
-        "testedVersion": "0.0.7",
-        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/424e4acf41cc0b93b2d770e879c4107efe60a299/src/content/compat/the-callisto-protocol-windows.md"
+        "status": "main-menu",
+        "testedDate": "2026-10-19",
+        "testedVersion": "0.3.0 cd4eab9",
+        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/b0c4e2a572a0fbeae360388d6e5b01426e04ea9e/src/content/compat/the-callisto-protocol-windows.md"
       }
     },
     "PPSA03355": {
@@ -1407,13 +1407,13 @@
     },
     "PPSA04379": {
       "windows": {
-        "slug": "construction-simulator-gold-edition-windows",
+        "slug": "construction-simulator-windows",
         "titleId": "PPSA04379",
         "os": "windows",
-        "status": "main-menu",
-        "testedDate": "2026-08-28",
-        "testedVersion": "KytyPS5-2026-09-08-d285efe",
-        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/eb25f983fadedb5da472d1b2bc63be9d1f21c12e/src/content/compat/construction-simulator-gold-edition-windows.md"
+        "status": "in-game",
+        "testedDate": "2026-10-19",
+        "testedVersion": "0.3.0 (009de8d)",
+        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/2d4df4995d5a1307ad600c95bce21fdb5edfbc99/src/content/compat/construction-simulator-windows.md"
       }
     },
     "PPSA04400": {
@@ -1458,6 +1458,17 @@
         "testedDate": "2026-07-18",
         "testedVersion": "0.0.5.5 BETA",
         "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/424e4acf41cc0b93b2d770e879c4107efe60a299/src/content/compat/41-hours-windows.md"
+      }
+    },
+    "PPSA04644": {
+      "windows": {
+        "slug": "cobra-kai-2-dojos-rising-windows",
+        "titleId": "PPSA04645",
+        "os": "windows",
+        "status": "logo",
+        "testedDate": "2026-10-20",
+        "testedVersion": "KytyPS5-2026-10-20-1a053f9",
+        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/a0b3212331d0e4fe02ea83aa581a29d876d6e596/src/content/compat/cobra-kai-2-dojos-rising-windows.md"
       }
     },
     "PPSA04649": {
@@ -1852,6 +1863,17 @@
         "testedDate": "2026-08-11",
         "testedVersion": "KytyPS5-2026-08-11-7a40dad",
         "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/b4ec88ff735471470380383803a2a919daf96d9a/src/content/compat/animal-well-windows.md"
+      }
+    },
+    "PPSA06898": {
+      "windows": {
+        "slug": "topspin-2k25-windows",
+        "titleId": "PPSA06899",
+        "os": "windows",
+        "status": "logo",
+        "testedDate": "2026-10-20",
+        "testedVersion": "7b7f9a7",
+        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/3d8de315f09cd22c54061b2301242a2c9f6c6a0c/src/content/compat/topspin-2k25-windows.md"
       }
     },
     "PPSA06960": {
@@ -2713,6 +2735,17 @@
         "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/8dc448e3725c49acde35155bf8bb10bbb8379b7e/src/content/compat/minecraft-dungeons-ii-windows.md"
       }
     },
+    "PPSA16411": {
+      "windows": {
+        "slug": "taiko-no-tatsujin-rhythm-festival-windows",
+        "titleId": "PPSA16441",
+        "os": "windows",
+        "status": "in-game",
+        "testedDate": "2026-10-19",
+        "testedVersion": "0.3.0 cd4eab9",
+        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/ef2dc92cb4f7060de825a05ae3e9859720c307f5/src/content/compat/taiko-no-tatsujin-rhythm-festival-windows.md"
+      }
+    },
     "PPSA16509": {
       "windows": {
         "slug": "red-matter-windows",
@@ -2995,6 +3028,17 @@
         "testedDate": "2026-08-19",
         "testedVersion": "2026-08-18-7e42513",
         "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/aeaebc35336b67ddcfd5fc32075ef789a367fddd/src/content/compat/arcade-game-zone-windows.md"
+      }
+    },
+    "PPSA19115": {
+      "linux": {
+        "slug": "dave-the-diver-linux",
+        "titleId": "PPSA19115",
+        "os": "linux",
+        "status": "in-game",
+        "testedDate": "2026-10-19",
+        "testedVersion": "2026-10-01-4479808",
+        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/67dbe4170e1efc0425a62fa3d1104f9d41cadddd/src/content/compat/dave-the-diver-linux.md"
       }
     },
     "PPSA19268": {
@@ -3616,6 +3660,17 @@
         "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/368b82192d3779eec0228038a1291e234cb8b582/src/content/compat/bendy-and-the-ink-machine-windows.md"
       }
     },
+    "PPSA27836": {
+      "windows": {
+        "slug": "onimusha-way-of-the-sword-windows",
+        "titleId": "PPSA27836",
+        "os": "windows",
+        "status": "main-menu",
+        "testedDate": "2026-10-20",
+        "testedVersion": "0.3.0",
+        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/21e4ef6adc4623cac6175b2fa4918a4db212b314/src/content/compat/onimusha-way-of-the-sword-windows.md"
+      }
+    },
     "PPSA28002": {
       "windows": {
         "slug": "ninja-gaiden-ragebound-windows",
@@ -4041,6 +4096,17 @@
         "testedDate": "2026-10-13",
         "testedVersion": "KytyPS5-2026-10-12-df5b9b9",
         "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/86ddee2ca339e1543423902192738a752fdd43bd/src/content/compat/hollow-knight-voidheart-edition-windows.md"
+      }
+    },
+    "PPSA35090": {
+      "windows": {
+        "slug": "hello-neighbor-windows",
+        "titleId": "PPSA35154",
+        "os": "windows",
+        "status": "in-game",
+        "testedDate": "2026-10-19",
+        "testedVersion": "0.3.0 (009de8d)",
+        "recordUrl": "https://github.com/KytyPS5/kytyps5.github.io/blob/57622a7936cbc102679327f995554271a966d771/src/content/compat/hello-neighbor-windows.md"
       }
     },
     "PPSA36543": {
