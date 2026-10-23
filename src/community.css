@@ -17,14 +17,14 @@
   gap: 12px;
 }
 .community-scope > span {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 .community-scope select {
   min-height: 46px;
-  border: 1px solid var(--line);
-  background: var(--paper);
-  color: var(--ink);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
   border-radius: var(--control-radius);
   padding: 0 36px 0 14px;
   font: inherit;
@@ -32,7 +32,7 @@
 .community-results,
 .community-directory-note,
 .community-record-date {
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .community-results {
   margin: 24px 0 36px;
@@ -45,7 +45,7 @@
 }
 .community-empty {
   padding: 40px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .community-empty h2 {
   font-family: var(--font-display);
@@ -59,7 +59,7 @@
 }
 .community-feedback {
   margin: 16px 0;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .community-feedback .text-link {
   margin-left: 8px;
@@ -95,12 +95,12 @@
   margin-left: 8px;
 }
 .community-game-heading p {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 .community-patch {
   padding: 28px 32px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   margin-top: 16px;
   min-width: 0;
 }
@@ -156,7 +156,7 @@
 }
 .community-file-size {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   text-decoration: none;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -191,7 +191,7 @@
   max-width: 75ch;
 }
 .community-archived {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 13px;
   flex: none;
 }
@@ -217,7 +217,7 @@
 }
 .community-targets a > span {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .community-targets a:hover,
 .community-fork-title a:hover,
@@ -227,7 +227,7 @@
 }
 .community-no-targets {
   font-size: 14px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 18px;
 }
 .game-community-resources {
@@ -241,7 +241,7 @@
   margin-bottom: 12px;
 }
 .community-section-intro > p {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-bottom: 32px;
 }
 .game-community-columns {

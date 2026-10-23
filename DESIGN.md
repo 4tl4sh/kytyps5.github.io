@@ -2,33 +2,38 @@
 name: KytyPS5
 description: Gaming editorial for an experimental, community-driven PlayStation 5 emulator
 colors:
-  paper: "#f7f9f8"
-  surface: "#eaf0ed"
-  ink: "#073f3b"
-  ink-hover: "#176058"
-  muted: "#496660"
-  mint: "#d4f5ab"
-  mint-deep: "#a4cf8b"
-  focus: "#4a8060"
-  line: "#cedbd4"
-  field-muted: "#bdcec6"
-  field-dark: "#06312e"
-  field-line: "#345d55"
-  code-bg: "#0d302e"
-  code-header: "#163e39"
-  code-label: "#aec5b9"
-  tab-ground: "#dce7df"
-  overlay: "#052623e8"
-  translucent-light: "#ffffff15"
-  translucent-dark: "#073f3b0c"
-  status-game-bg: "#e0efdb"
-  status-game: "#285c31"
-  status-menu-bg: "#f9ead4"
-  status-menu: "#815218"
-  status-logo-bg: "#f6dfdc"
-  status-logo: "#91463e"
-  status-boot-bg: "#e3e8e5"
-  status-boot: "#51625b"
+  color-bg-page: "#f7f9f8"
+  color-bg-surface: "#e4ece7"
+  color-bg-subtle: "#d4e3da"
+  color-text-primary: "#073f3b"
+  color-text-primary-hover: "#2e584d"
+  color-text-secondary: "#4d6460"
+  color-accent: "#d4f5ab"
+  color-accent-strong: "#a1d4a7"
+  color-on-accent: "#073f3b"
+  color-focus-ring: "#3e7947"
+  color-border-default: "#d4e3da"
+  color-field-bg: "#132e29"
+  color-field-bg-strong: "#073f3b"
+  color-field-text: "#f7f9f8"
+  color-field-text-muted: "#baccc1"
+  color-field-border: "#2e584d"
+  color-code-bg: "#132e29"
+  color-code-header-bg: "#073f3b"
+  color-code-text-muted: "#baccc1"
+  color-status-success-bg: "#dcefde"
+  color-status-success-fg: "#285b31"
+  color-status-warning-bg: "#f7e8d3"
+  color-status-warning-fg: "#815218"
+  color-status-danger-bg: "#fee5e1"
+  color-status-danger-fg: "#91463e"
+  color-status-neutral-bg: "#e4ece7"
+  color-status-neutral-fg: "#4d6460"
+  color-chart-success: "#599a63"
+  color-chart-warning: "#d0a45c"
+  color-chart-danger: "#ca7469"
+  color-chart-neutral: "#7d9086"
+  color-chart-untested: "#baccc1"
 typography:
   display:
     fontFamily: "'Big Shoulders Variable', 'Arial Narrow', sans-serif"
@@ -111,51 +116,51 @@ spacing:
   section-mobile: "65px"
 components:
   button-primary:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
+    backgroundColor: "{colors.color-text-primary}"
+    textColor: "{colors.color-bg-page}"
     rounded: "{rounded.control}"
     padding: "15px 23px"
   button-primary-hover:
-    backgroundColor: "{colors.ink-hover}"
+    backgroundColor: "{colors.color-text-primary-hover}"
   button-light:
-    backgroundColor: "{colors.mint}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.color-accent}"
+    textColor: "{colors.color-text-primary}"
     rounded: "{rounded.control}"
     padding: "15px 23px"
   button-light-hover:
-    backgroundColor: "{colors.paper}"
+    backgroundColor: "{colors.color-bg-page}"
   button-secondary:
-    textColor: "{colors.ink}"
+    textColor: "{colors.color-text-primary}"
     rounded: "{rounded.control}"
     padding: "15px 23px"
   button-secondary-hover:
-    backgroundColor: "{colors.surface}"
+    backgroundColor: "{colors.color-bg-surface}"
   search:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.color-bg-surface}"
+    textColor: "{colors.color-text-primary}"
     rounded: "{rounded.field}"
     padding: "12px 18px"
   navigation-link:
-    textColor: "{colors.ink}"
+    textColor: "{colors.color-text-primary}"
     padding: "8px 12px"
   status-in-game:
-    backgroundColor: "{colors.status-game-bg}"
-    textColor: "{colors.status-game}"
+    backgroundColor: "{colors.color-status-success-bg}"
+    textColor: "{colors.color-status-success-fg}"
     rounded: "{rounded.badge}"
     padding: "4px 9px"
   game-card:
-    textColor: "{colors.ink}"
+    textColor: "{colors.color-text-primary}"
   tab:
-    textColor: "{colors.ink}"
+    textColor: "{colors.color-text-primary}"
     padding: "9px 17px"
   accordion:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.color-bg-surface}"
+    textColor: "{colors.color-text-primary}"
     rounded: "{rounded.field}"
     padding: "0 19px"
   code-block:
-    backgroundColor: "{colors.code-bg}"
-    textColor: "{colors.field-muted}"
+    backgroundColor: "{colors.color-code-bg}"
+    textColor: "{colors.color-field-text-muted}"
     rounded: "{rounded.sleeve}"
 ---
 
@@ -179,33 +184,55 @@ Open space and broad color fields pace the marketing pages. Compatibility lists,
 This record describes the completed implementation in `src/tokens.css`, `src/styles.css` and the shared components. Token frontmatter is normative; the responsive and state details below explain how the implementation applies it. Component provenance is recorded in `COMPONENTS.md`.
 
 ## Colors
-Light mode retains the original cool paper, teal and mint palette. Dark mode uses forest grounds (`paper: #0e1a18`, `surface: #192b25`) with pale green text (`ink: #e0eee5`). Mint remains the accent (`#c5eca0`). Dedicated `deep-field`, `on-field` and `on-mint` tokens preserve contrast in full-color sections. Status chart colors correspond to the existing green/amber/red/gray vocabulary. Theme preference follows the system on first visit and persists once toggled; it is applied before React renders.
+Light mode retains the original cool paper, teal and mint palette. Dark mode uses forest grounds (`color-bg-page: #0a1c18`, `color-bg-surface: #132e29`) with pale green text (`color-text-primary: #e4ece7`). Mint remains the accent (`color-accent: #d4f5ab`). Dedicated `color-field-bg-strong`, `color-field-text` and `color-on-accent` tokens preserve contrast in full-color sections. Status chart colors correspond to the existing green/amber/red/gray vocabulary. Theme preference follows the system on first visit and persists once toggled; it is applied before React renders.
 
 The palette combines cool paper, deep forest teal and a light mint accent; compatibility states add a small semantic vocabulary.
 
+### Token structure
+
+Colors are defined in `src/tokens.css` in two layers. The core layer (`--core-color-*`) is a perceptual palette in OKLCH with a shared lightness scale of 11 tones (50-950) per family: one `teal` ramp, plus `lime`, `green`, `amber` and `red`, and the neutrals `neutral-0` (white) and `neutral-1000`. The teal hue drifts from 187 in the dark tones (the brand ink) to 160-165 in the light tints, matching the original site. The semantic layer (`--color-*`) assigns those tones to roles for light and dark themes, and components use only the semantic names.
+
+Four core tones are hand-tuned and not generated: `teal-900` (a compromise between the light-mode field and code backgrounds and the dark-mode surface) and the half-steps `teal-650`, `amber-650` and `red-650` (the original muted text and status foregrounds, between 600 and 700). Keep them if the palette is regenerated.
+
+### Adding a palette
+
+A new family is generated in OKLCH by keeping the shared lightness scale, so that the same tone number has the same lightness in every family and contrast between tones stays predictable across families:
+
+| Tone | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| L | 0.98 | 0.94 | 0.90 | 0.83 | 0.74 | 0.64 | 0.53 | 0.43 | 0.34 | 0.27 | 0.21 |
+
+1. Pick a hue (and a reference chroma) for the family. Chroma rises from near zero at tone 50 to its peak around tones 400-600 (about 0.10-0.11 for `amber`, `red` and `green`) and falls again toward 950. A hue may drift along the ramp, as `teal` does.
+2. For each tone, set OKLCH `L` from the table above (within about 0.01), the chosen hue and the chroma for that tone. Reduce the chroma until the color fits sRGB, and keep the lightness unchanged.
+3. Convert each tone to hex and declare `--core-color-<family>-<tone>` in the core layer of `src/tokens.css`. If a tone must be tuned by hand, mark it with a comment and list it in the paragraph above.
+4. Assign the new tones to roles in the semantic layer for both themes. Components never reference core tones directly.
+5. Check the contrast of every text/background pair that uses the new tones (at least AA, 4.5:1 for body text).
+
+The generated values are a starting point, not a rule. Small hand adjustments to a tone (a slight shift in hue, chroma or lightness) are fine when they make the palette more expressive, as with `teal-900` and the half-steps. Keep them subtle so the shared lightness scale still holds, mark them with a comment in `src/tokens.css` and recheck the contrast of the pairs they affect.
+
 ### Primary
 
-- **Forest Teal** (`ink`): primary text, actions, footer and feature fields. **Teal Hover** (`ink-hover`) is the primary button hover.
-- **Fresh Mint** (`mint`): contrast actions on teal, selected capture controls, the closing download band and decorative backing shapes. **Mint Edge** (`mint-deep`) defines the secondary orbit and occasional display emphasis.
+- **Forest Teal** (`color-text-primary`): primary text, actions, footer and feature fields. **Teal Hover** (`color-text-primary-hover`) is the primary button hover.
+- **Fresh Mint** (`color-accent`): contrast actions on teal, selected capture controls, the closing download band and decorative backing shapes. **Mint Edge** (`color-accent-strong`) defines the secondary orbit and occasional display emphasis.
 
 ### Neutral
 
-- **Cool Paper** (`paper`): page ground and light text on teal.
-- **Soft Sage Paper** (`surface`): fields, accordions, metadata blocks, table headers and hover surfaces.
-- **Muted Teal** (`muted`): metadata and secondary controls. Main reading paragraphs use ink after the final stylesheet overrides.
-- **Sage Boundary** (`line`): functional control edges and real table dividers.
-- **Field Mist**, **Deep Field** and **Field Boundary** (`field-muted`, `field-dark`, `field-line`): secondary content and structure inside teal sections.
-- **Code Ground**, **Code Header** and **Code Label** (`code-bg`, `code-header`, `code-label`): terminal blocks and their header controls.
-- **Tab Ground** (`tab-ground`): shared track behind paper active tabs.
-- **Focus Green** (`focus`): keyboard focus outlines.
-- **Overlay**, **Light Wash** and **Teal Wash** (`overlay`, `translucent-light`, `translucent-dark`): modal dimming and subtle labels on contrasting surfaces.
+- **Cool Paper** (`color-bg-page`): page ground and light text on teal.
+- **Soft Sage Paper** (`color-bg-surface`): fields, accordions, metadata blocks, table headers and hover surfaces.
+- **Muted Teal** (`color-text-secondary`): metadata and secondary controls. Main reading paragraphs use ink after the final stylesheet overrides.
+- **Sage Boundary** (`color-border-default`): functional control edges and real table dividers.
+- **Field Mist**, **Deep Field** and **Field Boundary** (`color-field-text-muted`, `color-field-bg`, `color-field-border`): secondary content and structure inside teal sections.
+- **Code Ground**, **Code Header** and **Code Label** (`color-code-bg`, `color-code-header-bg`, `color-code-text-muted`): terminal blocks and their header controls.
+- **Tab Ground** (`color-bg-subtle`): shared track behind paper active tabs.
+- **Focus Green** (`color-focus-ring`): keyboard focus outlines.
+- **Overlay**, **Light Wash** and **Teal Wash** (`color-overlay`, `color-veil-light`, `color-veil-dark`): modal dimming and subtle labels on contrasting surfaces.
 
 ### Semantic status colors
 
-- **Gameplay Green** (`status-game` / `status-game-bg`): the In game badge.
-- **Menu Amber** (`status-menu` / `status-menu-bg`): Main menu badges, release-fetch notices and build-age notices.
-- **Logo Rose** (`status-logo` / `status-logo-bg`): Logo badges.
-- **Boot Gray** (`status-boot` / `status-boot-bg`): Doesn't boot badges.
+- **Gameplay Green** (`color-status-success-fg` / `color-status-success-bg`): the In game badge.
+- **Menu Amber** (`color-status-warning-fg` / `color-status-warning-bg`): Main menu badges, release-fetch notices and build-age notices.
+- **Logo Rose** (`color-status-danger-fg` / `color-status-danger-bg`): Logo badges.
+- **Boot Gray** (`color-status-neutral-fg` / `color-status-neutral-bg`): Doesn't boot badges.
 
 **The Evidence Rule.** Status colors always accompany readable labels. Artwork establishes the title; reports establish compatibility.
 
