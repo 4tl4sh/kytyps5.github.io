@@ -8,12 +8,12 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
-  scrollbar-color: var(--muted) var(--paper);
+  scrollbar-color: var(--color-text-secondary) var(--color-bg-page);
 }
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.65;
@@ -52,7 +52,7 @@ button {
   border: none;
 }
 input {
-  caret-color: var(--ink);
+  caret-color: var(--color-text-primary);
 }
 a {
   color: inherit;
@@ -85,11 +85,11 @@ p {
   text-wrap: pretty;
 }
 ::selection {
-  color: var(--ink);
-  background: var(--mint);
+  color: var(--color-text-primary);
+  background: var(--color-accent);
 }
 :focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 3px solid var(--color-focus-ring);
   outline-offset: 5px;
   border-radius: 3px;
 }
@@ -113,7 +113,7 @@ p {
   left: 20px;
   z-index: 100;
   transform: translateY(-160%);
-  background: var(--mint);
+  background: var(--color-accent);
   padding: 12px 20px;
   border-radius: 8px;
   font-weight: 600;
@@ -154,8 +154,8 @@ p {
   min-height: 54px;
   padding: 15px 23px;
   border-radius: var(--control-radius);
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--color-text-primary);
+  color: var(--color-bg-page);
   font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
@@ -167,7 +167,7 @@ p {
   border: 1px solid transparent;
 }
 .button:hover {
-  background: var(--ink-hover);
+  background: var(--color-text-primary-hover);
   transform: translateY(-2px);
 }
 .button:active {
@@ -180,19 +180,19 @@ p {
   gap: 8px;
 }
 .button.light {
-  background: var(--mint);
-  color: var(--ink);
+  background: var(--color-accent);
+  color: var(--color-text-primary);
 }
 .button.light:hover {
-  background: var(--paper);
+  background: var(--color-bg-page);
 }
 .button.secondary {
   background: transparent;
-  color: var(--ink);
-  border-color: var(--line);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-default);
 }
 .button.secondary:hover {
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .icon-button {
   width: 44px;
@@ -201,13 +201,13 @@ p {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 1px solid var(--line);
+  border: 1px solid var(--color-border-default);
   transition:
     background 0.2s,
     transform 0.2s;
 }
 .icon-button:hover:not(:disabled) {
-  background: var(--mint);
+  background: var(--color-accent);
   transform: translateY(-1px);
 }
 .magnetic {
@@ -236,8 +236,8 @@ p {
   flex-direction: column;
   gap: 14px;
   padding: 20px;
-  background: var(--surface);
-  color: var(--ink);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
   text-align: center;
 }
 .image-fallback span {
@@ -250,7 +250,7 @@ p {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: var(--paper);
+  background: var(--color-bg-page);
 }
 .header-inner {
   height: 86px;
@@ -298,7 +298,7 @@ p {
   position: absolute;
   inset: 0;
   border-radius: 7px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .header-actions {
   display: flex;
@@ -319,7 +319,7 @@ p {
 }
 .scroll-progress {
   height: 2px;
-  background: var(--ink);
+  background: var(--color-text-primary);
   width: 100%;
   transform-origin: left;
   position: absolute;
@@ -330,7 +330,7 @@ p {
 .lightbox-overlay {
   position: fixed;
   inset: 0;
-  background: var(--overlay);
+  background: var(--color-overlay);
   z-index: 60;
   animation: appear 0.2s ease;
 }
@@ -340,7 +340,7 @@ p {
   inset: 12px 12px auto;
   max-height: calc(100svh - 24px);
   overflow-y: auto;
-  background: var(--paper);
+  background: var(--color-bg-page);
   border-radius: 12px;
   padding: 26px;
   animation: menu-in 0.3s ease;
@@ -365,7 +365,7 @@ p {
   justify-content: space-between;
 }
 .mobile-menu nav a:hover {
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 
 /* A collection of game sleeves, not an imaginary emulator UI. */
@@ -391,7 +391,7 @@ p {
 .hero-description {
   font-size: 16px;
   line-height: 1.8;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 30px;
   max-width: 470px;
 }
@@ -413,16 +413,16 @@ p {
   display: inline-flex;
   gap: 7px;
   align-items: center;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 13px;
 }
 .hero-platforms a:hover {
-  color: var(--ink);
+  color: var(--color-text-primary);
 }
 .experimental-note {
   font-size: 13px;
   margin-top: 32px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   display: flex;
   align-items: flex-start;
   gap: 7px;
@@ -431,7 +431,7 @@ p {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--color-text-primary);
   display: block;
   margin-top: 7px;
   flex-shrink: 0;
@@ -450,14 +450,14 @@ p {
 .orbit-one {
   width: 440px;
   height: 440px;
-  background: var(--mint);
+  background: var(--color-accent);
   left: 16%;
   top: 25px;
 }
 .orbit-two {
   width: 380px;
   height: 380px;
-  border: 1px solid var(--mint-deep);
+  border: 1px solid var(--color-accent-strong);
   left: 21%;
   top: 55px;
 }
@@ -469,7 +469,7 @@ p {
   z-index: 3;
 }
 .hero-main-card {
-  background: var(--paper);
+  background: var(--color-bg-page);
   border-radius: 9px;
   overflow: hidden;
 }
@@ -481,7 +481,7 @@ p {
   padding-inline: 13px;
   font-size: 13px;
   font-weight: 650;
-  color: var(--ink);
+  color: var(--color-text-primary);
 }
 .game-sleeve > span:last-child {
   font-size: 13px;
@@ -519,7 +519,7 @@ p {
   position: absolute;
   border-radius: 8px;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--color-text-primary);
 }
 .hero-back-card img {
   width: 100%;
@@ -538,7 +538,7 @@ p {
 }
 .hero-star {
   position: absolute;
-  color: var(--ink);
+  color: var(--color-text-primary);
   z-index: 4;
   line-height: 1;
 }
@@ -571,8 +571,8 @@ p {
   z-index: 5;
   left: 28%;
   top: 397px;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--color-text-primary);
+  color: var(--color-bg-page);
   padding: 13px 16px;
   border-radius: 8px;
   transform: rotate(-3deg);
@@ -592,7 +592,7 @@ p {
 }
 .hero-caption-chip > span > span:last-child {
   font-size: 13px;
-  color: var(--mint);
+  color: var(--color-accent);
 }
 .hero-carousel-controls {
   position: absolute;
@@ -617,7 +617,7 @@ p {
   position: absolute;
   width: 6px;
   height: 6px;
-  background: var(--line);
+  background: var(--color-border-default);
   border-radius: 50%;
   top: 12px;
   left: 9px;
@@ -626,7 +626,7 @@ p {
     width 0.2s;
 }
 .hero-carousel-controls > div > button.active::after {
-  background: var(--ink);
+  background: var(--color-text-primary);
   width: 18px;
   left: 3px;
   border-radius: 4px;
@@ -645,7 +645,7 @@ p {
   align-items: center;
   padding: 31px 0 34px;
   margin-top: 14px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 13px;
 }
 .hero-bottom a {
@@ -660,7 +660,7 @@ p {
   transform: translateY(4px);
 }
 .project-strip {
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .project-strip > div {
   display: flex;
@@ -677,17 +677,17 @@ p {
 }
 .project-strip-intro p {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   line-height: 1.7;
 }
 .project-strip-intro strong {
-  color: var(--ink);
+  color: var(--color-text-primary);
   font-weight: 600;
 }
 .open-symbol {
   width: 47px;
   height: 47px;
-  background: var(--mint);
+  background: var(--color-accent);
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -705,7 +705,7 @@ p {
 }
 .project-strip > div > div:not(:first-child) > span {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 5px;
 }
 .strip-github {
@@ -743,7 +743,7 @@ p {
 .section-heading p {
   font-size: 15px;
   line-height: 1.75;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .section-heading .text-link {
   margin-top: 17px;
@@ -774,7 +774,7 @@ p {
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .game-card-art img,
 .game-card-art .image-fallback {
@@ -792,8 +792,8 @@ p {
   right: 14px;
   width: 36px;
   height: 36px;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -843,20 +843,20 @@ p {
   display: inline-block;
 }
 .status-in-game {
-  background: var(--status-game-bg);
-  color: var(--status-game);
+  background: var(--color-status-success-bg);
+  color: var(--color-status-success-fg);
 }
 .status-main-menu {
-  background: var(--status-menu-bg);
-  color: var(--status-menu);
+  background: var(--color-status-warning-bg);
+  color: var(--color-status-warning-fg);
 }
 .status-logo {
-  background: var(--status-logo-bg);
-  color: var(--status-logo);
+  background: var(--color-status-danger-bg);
+  color: var(--color-status-danger-fg);
 }
 .status-doesnt-boot {
-  background: var(--status-boot-bg);
-  color: var(--status-boot);
+  background: var(--color-status-neutral-bg);
+  color: var(--color-status-neutral-fg);
 }
 .carousel-controls {
   display: flex;
@@ -866,7 +866,7 @@ p {
 }
 .carousel-controls > span {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .carousel-controls > div {
   display: flex;
@@ -878,7 +878,7 @@ p {
   justify-content: space-between;
   gap: 25px;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .compatibility-note > span {
   display: inline-flex;
@@ -893,8 +893,8 @@ p {
   font-weight: 600;
 }
 .capture-section {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--color-text-primary);
+  color: var(--color-bg-page);
   padding-block: 90px;
 }
 .capture-grid {
@@ -909,7 +909,7 @@ p {
 .capture-copy p {
   font-size: 15px;
   line-height: 1.8;
-  color: var(--field-muted);
+  color: var(--color-field-text-muted);
   margin-top: 24px;
   max-width: 400px;
 }
@@ -928,13 +928,13 @@ p {
   text-align: left;
   font-size: 14px;
   padding: 13px 15px;
-  color: var(--field-muted);
+  color: var(--color-field-text-muted);
 }
 .capture-selector button[aria-pressed="true"] {
-  color: var(--ink);
+  color: var(--color-text-primary);
 }
 .capture-selector button[aria-pressed="true"] {
-  background: var(--mint);
+  background: var(--color-accent);
   border-radius: 6px;
 }
 .capture-selector button > span:first-child,
@@ -944,11 +944,11 @@ p {
 .capture-active {
   position: absolute;
   inset: 0;
-  background: var(--mint);
+  background: var(--color-accent);
   border-radius: 6px;
 }
 .capture-frame {
-  background: var(--field-dark);
+  background: var(--color-field-bg);
   border-radius: 12px;
   overflow: hidden;
   transform: rotate(2deg);
@@ -982,9 +982,9 @@ p {
   height: 30px;
   display: grid;
   place-items: center;
-  background: var(--mint);
+  background: var(--color-accent);
   border-radius: 50%;
-  color: var(--ink);
+  color: var(--color-text-primary);
 }
 
 /* Platform board, shared code controls */
@@ -996,8 +996,8 @@ p {
 .platform-primary {
   position: relative;
   min-height: 415px;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--color-text-primary);
+  color: var(--color-bg-page);
   border-radius: 12px;
   padding: 27px;
   display: flex;
@@ -1014,7 +1014,7 @@ p {
 .platform-card-heading > span {
   font-size: 13px;
   padding: 3px 8px;
-  background: var(--translucent-light);
+  background: var(--color-veil-light);
   border-radius: 4px;
 }
 .platform-primary h3,
@@ -1026,7 +1026,7 @@ p {
 }
 .platform-primary p {
   font-size: 13px;
-  color: var(--field-muted);
+  color: var(--color-field-text-muted);
   line-height: 1.75;
   margin-top: 13px;
   margin-bottom: 22px;
@@ -1048,7 +1048,7 @@ p {
   transform: perspective(300px) rotateY(-20deg) rotateZ(-5deg);
 }
 .windows-art i {
-  background: var(--mint);
+  background: var(--color-accent);
 }
 .platform-secondary {
   display: grid;
@@ -1061,20 +1061,20 @@ p {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .platform-mini .platform-card-heading {
   width: 100%;
 }
 .platform-mini .platform-card-heading span {
-  background: var(--translucent-dark);
+  background: var(--color-veil-dark);
 }
 .platform-mini h3 {
   font-size: 34px;
   margin-top: 17px;
 }
 .platform-mini p {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 13px;
   margin-top: 9px;
 }
@@ -1083,10 +1083,10 @@ p {
   margin-top: 12px;
 }
 .platform-1 {
-  background: var(--mint);
+  background: var(--color-accent);
 }
 .platform-code {
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: 12px;
   padding: 25px;
   display: flex;
@@ -1105,7 +1105,7 @@ p {
 }
 .platform-code > p {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 13px;
 }
 .platform-code .tabs {
@@ -1139,7 +1139,7 @@ p {
   justify-content: center;
   gap: 8px;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 25px;
 }
 .tabs {
@@ -1148,7 +1148,7 @@ p {
   max-width: 100%;
   gap: 3px;
   border-radius: 7px;
-  background: var(--tab-ground);
+  background: var(--color-bg-subtle);
   padding: 4px;
   margin-bottom: 20px;
   overflow-x: auto;
@@ -1173,7 +1173,7 @@ p {
   position: absolute;
   inset: 0;
   border-radius: 5px;
-  background: var(--paper);
+  background: var(--color-bg-page);
 }
 .platform-code .tab {
   padding: 7px 11px;
@@ -1181,8 +1181,8 @@ p {
   min-height: 34px;
 }
 .code-block {
-  background: var(--code-bg);
-  color: var(--field-muted);
+  background: var(--color-code-bg);
+  color: var(--color-field-text-muted);
   border-radius: 9px;
   overflow: hidden;
   text-align: left;
@@ -1196,8 +1196,8 @@ p {
   gap: 12px;
   font-size: 13px;
   padding: 14px 20px;
-  background: var(--code-header);
-  color: var(--code-label);
+  background: var(--color-code-header-bg);
+  color: var(--color-code-text-muted);
 }
 .code-header > span {
   display: flex;
@@ -1209,17 +1209,17 @@ p {
   height: 6px;
   display: block;
   border-radius: 50%;
-  background: var(--mint);
+  background: var(--color-accent);
 }
 .code-header button {
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  color: var(--field-muted);
+  color: var(--color-field-text-muted);
 }
 .code-header button:hover {
-  color: var(--mint);
+  color: var(--color-accent);
 }
 .code-block pre {
   overflow-x: auto;
@@ -1227,7 +1227,7 @@ p {
   padding: 23px;
   font-size: 13px;
   line-height: 1.9;
-  scrollbar-color: var(--code-label) var(--code-bg);
+  scrollbar-color: var(--color-code-text-muted) var(--color-code-bg);
 }
 code,
 pre {
@@ -1239,7 +1239,7 @@ pre {
 .build-instructions > div:last-child > p {
   font-size: 14px;
   line-height: 1.8;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 22px;
 }
 
@@ -1267,7 +1267,7 @@ pre {
   height: 58px;
   display: grid;
   place-items: center;
-  background: var(--mint);
+  background: var(--color-accent);
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -1280,7 +1280,7 @@ pre {
 .start-step p {
   font-size: 14px;
   line-height: 1.8;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   max-width: 460px;
   margin-top: 15px;
 }
@@ -1296,7 +1296,7 @@ pre {
 }
 .faq-section > div > p {
   font-size: 14px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 26px;
 }
 .faq-section .text-link {
@@ -1306,7 +1306,7 @@ pre {
   width: 100%;
 }
 .accordion-item {
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: 8px;
   margin-bottom: 9px;
   padding-inline: 19px;
@@ -1331,7 +1331,7 @@ pre {
   transform: rotate(45deg);
 }
 .accordion-trigger:hover {
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .accordion-content {
   overflow: hidden;
@@ -1348,7 +1348,7 @@ pre {
 .accordion-content p {
   font-size: 14px;
   line-height: 1.85;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   padding-right: 25px;
 }
 .community-section {
@@ -1359,7 +1359,7 @@ pre {
   padding-block: 30px 130px;
 }
 .community-art {
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: 12px;
   aspect-ratio: 1.22;
   overflow: hidden;
@@ -1438,14 +1438,14 @@ pre {
   position: absolute;
   left: 68%;
   top: 76%;
-  background: var(--mint);
+  background: var(--color-accent);
   border-radius: 50%;
 }
 .community-copy h2 {
   font-size: clamp(42px, 4.2vw, 64px);
 }
 .community-copy p {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 15px;
   line-height: 1.85;
   margin-top: 25px;
@@ -1459,7 +1459,7 @@ pre {
   font-size: 13px;
 }
 .download-band {
-  background: var(--mint);
+  background: var(--color-accent);
 }
 .download-band > a {
   display: block;
@@ -1493,8 +1493,8 @@ pre {
   margin-top: 20px;
 }
 .site-footer {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--color-text-primary);
+  color: var(--color-bg-page);
   padding-top: 65px;
   overflow: hidden;
 }
@@ -1505,7 +1505,7 @@ pre {
 }
 .footer-about p {
   font-size: 13px;
-  color: var(--field-muted);
+  color: var(--color-field-text-muted);
   line-height: 1.85;
   margin-top: 23px;
 }
@@ -1521,7 +1521,7 @@ pre {
 .footer-top h3 {
   font-size: 13px;
   margin-bottom: 10px;
-  color: var(--field-muted);
+  color: var(--color-field-text-muted);
   font-weight: 500;
 }
 .footer-top nav a {
@@ -1529,7 +1529,7 @@ pre {
   width: fit-content;
 }
 .footer-top nav a:hover {
-  color: var(--mint);
+  color: var(--color-accent);
 }
 .footer-note {
   justify-self: end;
@@ -1537,7 +1537,7 @@ pre {
 .footer-symbol {
   font-family: var(--font-display);
   font-size: 105px;
-  color: var(--mint);
+  color: var(--color-accent);
   line-height: 0.9;
   display: block;
 }
@@ -1549,7 +1549,7 @@ pre {
 .footer-note a {
   margin-top: 19px;
   font-size: 13px;
-  color: var(--field-muted);
+  color: var(--color-field-text-muted);
 }
 .footer-large {
   font-family: var(--font-display);
@@ -1559,7 +1559,7 @@ pre {
   letter-spacing: -0.01em;
   margin-top: 65px;
   margin-bottom: 30px;
-  color: var(--mint);
+  color: var(--color-accent);
   white-space: nowrap;
 }
 .footer-bottom {
@@ -1569,7 +1569,7 @@ pre {
   flex-wrap: wrap;
   gap: 12px 30px;
   padding-block: 22px 30px;
-  color: var(--field-muted);
+  color: var(--color-field-text-muted);
   font-size: 13px;
 }
 
@@ -1593,7 +1593,7 @@ pre {
   margin-top: 28px;
 }
 .page-intro > p {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 16px;
   line-height: 1.85;
   max-width: 650px;
@@ -1607,7 +1607,7 @@ pre {
 .database-stats {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: 12px;
   padding-block: 28px;
   gap: 15px;
@@ -1627,12 +1627,12 @@ pre {
 }
 .database-stats > div > span:not(.status) {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .status-explainer {
   font-size: 13px;
   margin-top: 17px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .status-explainer summary {
   cursor: pointer;
@@ -1643,7 +1643,7 @@ pre {
   grid-template-columns: repeat(4, 1fr);
   gap: 25px;
   padding: 24px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   margin-top: 12px;
   border-radius: 10px;
 }
@@ -1658,13 +1658,13 @@ pre {
   display: flex;
   align-items: center;
   gap: 13px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: 8px;
   min-height: 58px;
   padding: 12px 18px;
 }
 .search-box:focus-within {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--color-text-primary);
   outline-offset: 2px;
 }
 .search-box input {
@@ -1677,7 +1677,7 @@ pre {
   font-size: 15px;
 }
 .search-box input::placeholder {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   opacity: 1;
 }
 .search-box button {
@@ -1713,11 +1713,11 @@ pre {
   opacity: 0.7;
 }
 .status-filters button:hover {
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .status-filters button.selected {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--color-text-primary);
+  color: var(--color-bg-page);
 }
 .select-filters {
   display: flex;
@@ -1742,7 +1742,7 @@ pre {
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin: 31px 0 17px;
 }
 .results-heading button {
@@ -1762,19 +1762,19 @@ pre {
 }
 .game-table-head {
   padding: 17px 20px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: 8px;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .game-table-row {
   padding: 17px 20px;
   min-height: 100px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--color-border-default);
   transition: background 0.2s; /* taste-skill-ignore: real compatibility data table row */ /* taste-skill-ignore: real compatibility data table row */
 }
 .game-table-row:hover {
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .table-game {
   display: flex;
@@ -1807,7 +1807,7 @@ pre {
 }
 .table-game > div > span {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   display: block;
   margin-top: 5px;
 }
@@ -1816,7 +1816,7 @@ pre {
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .table-platforms > span {
   display: flex;
@@ -1828,7 +1828,7 @@ pre {
 }
 .table-date {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-variant-numeric: tabular-nums;
 }
 .table-arrow {
@@ -1842,7 +1842,7 @@ pre {
   padding-block: 30px;
 }
 .load-more p {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 13px;
   margin-bottom: 16px;
 }
@@ -1853,7 +1853,7 @@ pre {
   padding: 30px;
   margin-top: 55px;
   border-radius: 12px;
-  background: var(--mint);
+  background: var(--color-accent);
 }
 .report-callout h2 {
   font-family: var(--font-display);
@@ -1862,7 +1862,7 @@ pre {
 }
 .report-callout p {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 5px;
 }
 .report-callout .text-link {
@@ -1885,7 +1885,7 @@ pre {
 }
 .empty-state p {
   max-width: 500px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .route-empty {
   min-height: 65vh;
@@ -1896,13 +1896,13 @@ pre {
   font-size: 150px;
   font-weight: 800;
   line-height: 1;
-  color: var(--mint-deep);
+  color: var(--color-accent-strong);
 }
 .loading {
   display: grid;
   place-items: center;
   min-height: 200px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 
 /* Compatibility reports and image viewer */
@@ -1931,7 +1931,7 @@ pre {
   margin-block: 15px 12px;
 }
 .game-id {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 13px;
   display: flex;
   flex-wrap: wrap;
@@ -1946,7 +1946,7 @@ pre {
 }
 .catalog-metadata dt {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .catalog-metadata dd {
   margin: 3px 0 0;
@@ -1960,8 +1960,8 @@ pre {
   margin-top: 20px;
   padding: 17px 20px;
   border-radius: 8px;
-  background: var(--status-menu-bg);
-  color: var(--status-menu);
+  background: var(--color-status-warning-bg);
+  color: var(--color-status-warning-fg);
   font-size: 13px;
   line-height: 1.8;
 }
@@ -1977,8 +1977,8 @@ pre {
   margin-top: 20px;
   padding: 20px;
   border-radius: 8px;
-  background: var(--status-menu-bg);
-  color: var(--status-menu);
+  background: var(--color-status-warning-bg);
+  color: var(--color-status-warning-fg);
   font-size: 14px;
   line-height: 1.7;
   overflow-wrap: anywhere;
@@ -2048,7 +2048,7 @@ pre {
   font-size: 14px;
 }
 .game-report-layout > aside > button.active {
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .game-report-layout > aside > button:disabled > span:last-child {
   font-size: 13px;
@@ -2056,7 +2056,7 @@ pre {
 .game-report-layout > aside > p {
   margin-top: 25px;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .report-heading {
   display: flex;
@@ -2076,7 +2076,7 @@ pre {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 22px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   padding: 23px;
   border-radius: 10px;
   margin-block: 23px 35px;
@@ -2084,7 +2084,7 @@ pre {
 }
 .report-metadata dt {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-bottom: 7px;
 }
 .report-metadata dd {
@@ -2139,11 +2139,11 @@ pre {
 .markdown th,
 .markdown td {
   text-align: left;
-  border: 1px solid var(--line);
+  border: 1px solid var(--color-border-default);
   padding: 12px;
 }
 .markdown th {
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .markdown pre {
   overflow: auto;
@@ -2152,8 +2152,8 @@ pre {
 .markdown-code > code {
   display: block;
   padding: 20px;
-  background: var(--code-bg);
-  color: var(--field-muted);
+  background: var(--color-code-bg);
+  color: var(--color-field-text-muted);
   border-radius: 8px;
   white-space: pre;
   overflow-x: auto;
@@ -2165,7 +2165,7 @@ pre {
 .markdown blockquote {
   margin: 20px 0;
   padding: 20px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: 8px;
 }
 .report-gallery h3 {
@@ -2185,7 +2185,7 @@ pre {
   padding: 0;
   overflow: hidden;
   border-radius: 8px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .report-gallery img,
 .report-gallery .image-fallback {
@@ -2201,7 +2201,7 @@ pre {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  background: var(--paper);
+  background: var(--color-bg-page);
   border-radius: 5px;
   padding: 5px;
   width: 31px;
@@ -2214,7 +2214,7 @@ pre {
   transform: translate(-50%, -50%);
   width: min(1200px, calc(100% - 40px));
   z-index: 61;
-  color: var(--paper);
+  color: var(--color-bg-page);
 }
 .lightbox > h2 {
   font-size: 14px;
@@ -2227,15 +2227,15 @@ pre {
   width: 100%;
   max-height: 76vh;
   object-fit: contain;
-  background: var(--code-bg);
+  background: var(--color-code-bg);
   border-radius: 8px;
 }
 .lightbox-close {
   position: absolute;
   top: -14px;
   right: 0;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--color-text-primary);
+  color: var(--color-bg-page);
   border: 0;
 }
 .lightbox-controls {
@@ -2245,8 +2245,8 @@ pre {
   margin-top: 20px;
 }
 .lightbox-controls .icon-button {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
 }
 
 /* Downloads and long-form documentation */
@@ -2271,12 +2271,12 @@ pre {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   overflow-wrap: anywhere;
 }
 .release-info > time {
   margin-left: auto;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .release-info button {
   padding: 7px;
@@ -2287,14 +2287,14 @@ pre {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--color-text-primary);
 }
 .spinning {
   animation: spin 1s linear infinite;
 }
 .fetch-notice {
-  background: var(--status-menu-bg);
-  color: var(--status-menu);
+  background: var(--color-status-warning-bg);
+  color: var(--color-status-warning-fg);
   font-size: 13px;
   padding: 15px;
   border-radius: 7px;
@@ -2314,14 +2314,14 @@ pre {
   flex-direction: column;
   padding: 31px;
   border-radius: 12px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .download-platform-0 {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--color-text-primary);
+  color: var(--color-bg-page);
 }
 .download-platform-2 {
-  background: var(--mint);
+  background: var(--color-accent);
 }
 .download-platform-top {
   display: flex;
@@ -2331,13 +2331,13 @@ pre {
   scroll-margin-top: 140px;
 }
 .download-platform-top > span {
-  background: var(--translucent-dark);
+  background: var(--color-veil-dark);
   padding: 4px 9px;
   border-radius: 4px;
   font-size: 13px;
 }
 .download-platform-0 .download-platform-top > span {
-  background: var(--translucent-light);
+  background: var(--color-veil-light);
 }
 .download-platform h2 {
   font-family: var(--font-display);
@@ -2348,14 +2348,14 @@ pre {
 }
 .download-platform > p {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   line-height: 1.8;
   margin-top: 18px;
   margin-bottom: 30px;
   flex: 1;
 }
 .download-platform-0 > p {
-  color: var(--field-muted);
+  color: var(--color-field-text-muted);
 }
 .download-architecture {
   display: flex;
@@ -2388,18 +2388,18 @@ pre {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: 8px;
   padding: 23px;
   margin-top: 40px;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .experiment-callout strong {
-  color: var(--ink);
+  color: var(--color-text-primary);
 }
 .requirements-section {
-  background: var(--surface);
+  background: var(--color-bg-surface);
   padding-block: 80px;
 }
 .requirements-grid {
@@ -2423,7 +2423,7 @@ pre {
   align-items: baseline;
   gap: 11px;
   font-size: 14px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-block: 14px;
 }
 .requirements-grid li svg {
@@ -2435,7 +2435,7 @@ pre {
   align-items: center;
   gap: 22px;
   margin-top: 55px;
-  background: var(--mint);
+  background: var(--color-accent);
   padding: 27px;
   border-radius: 10px;
 }
@@ -2445,7 +2445,7 @@ pre {
 }
 .inline-help p {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 4px;
 }
 .inline-help .text-link {
@@ -2469,7 +2469,7 @@ pre {
 }
 .docs-nav > span {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   display: block;
   margin-bottom: 12px;
 }
@@ -2489,7 +2489,7 @@ pre {
 }
 .docs-nav nav a:hover,
 .docs-nav nav a.active {
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .docs-nav > .text-link {
   font-size: 13px;
@@ -2514,17 +2514,17 @@ pre {
 }
 .doc-section > div > p {
   font-size: 15px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   line-height: 1.85;
   margin-block: 20px;
 }
 .doc-section p a {
   font-weight: 550;
-  color: var(--ink);
+  color: var(--color-text-primary);
   text-decoration: underline;
 }
 .doc-section ul {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 14px;
   padding-left: 20px;
 }
@@ -2532,10 +2532,10 @@ pre {
   margin-block: 13px;
 }
 .doc-callout {
-  background: var(--mint);
+  background: var(--color-accent);
   padding: 20px;
   border-radius: 8px;
-  color: var(--ink) !important;
+  color: var(--color-text-primary) !important;
   font-size: 13px !important;
 }
 .doc-section .build-instructions {
@@ -2555,11 +2555,11 @@ pre {
   align-items: center;
   padding: 9px 12px;
   border-radius: 5px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   font-size: 13px;
 }
 .repository-links a:hover {
-  background: var(--mint);
+  background: var(--color-accent);
 }
 .faq-page {
   display: grid;
@@ -2573,7 +2573,7 @@ pre {
   font-weight: 750;
 }
 .faq-page-aside p {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 14px;
   line-height: 1.85;
   margin-block: 20px 30px;
@@ -2596,13 +2596,13 @@ pre {
   font-size: 53px;
 }
 .about-story p {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 15px;
   line-height: 1.85;
   margin-bottom: 24px;
 }
 .about-story p a {
-  color: var(--ink);
+  color: var(--color-text-primary);
   text-decoration: underline;
 }
 .about-story .button {
@@ -2611,7 +2611,7 @@ pre {
 .about-logomark {
   min-height: 225px;
   padding: 40px;
-  background: var(--mint);
+  background: var(--color-accent);
   border-radius: 12px;
   margin-top: 38px;
   display: flex;
@@ -2624,7 +2624,7 @@ pre {
   font-size: 13px;
 }
 .architecture-section {
-  background: var(--surface);
+  background: var(--color-bg-surface);
   padding-block: 80px;
 }
 .architecture-grid {
@@ -2641,7 +2641,7 @@ pre {
 }
 .architecture-grid p {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   line-height: 1.85;
   margin-top: 15px;
 }
@@ -2653,7 +2653,7 @@ pre {
 }
 .tech-list span {
   font-size: 13px;
-  background: var(--paper);
+  background: var(--color-bg-page);
   border-radius: 5px;
   padding: 5px 11px;
 }
@@ -2671,7 +2671,7 @@ pre {
 .legal-grid p {
   font-size: 14px;
   line-height: 1.85;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 17px;
 }
 .legal-grid .text-link {
@@ -2681,7 +2681,7 @@ pre {
 .repo-stats {
   display: flex;
   justify-content: space-evenly;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: 12px;
   padding: 35px;
   margin-block: 75px 90px;
@@ -2703,7 +2703,7 @@ pre {
   text-align: center;
 }
 .repo-stats > a:hover {
-  background: var(--mint);
+  background: var(--color-accent);
 }
 .repo-stats strong {
   font-family: var(--font-display);
@@ -2713,7 +2713,7 @@ pre {
   font-variant-numeric: tabular-nums;
 }
 .repo-stats span {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 13px;
 }
 .contributor-grid {
@@ -2728,12 +2728,12 @@ pre {
   gap: 13px;
   padding: 17px;
   border-radius: 9px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   min-width: 0;
   transition: background 0.2s;
 }
 .contributor-grid a:hover {
-  background: var(--mint);
+  background: var(--color-accent);
 }
 .contributor-grid img {
   width: 43px;
@@ -2751,7 +2751,7 @@ pre {
 }
 .contributor-grid a > div > span {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   display: block;
 }
 .contributor-grid a > svg {
@@ -2759,7 +2759,7 @@ pre {
 }
 .small-note {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 15px;
 }
 .contribution-content {
@@ -2776,7 +2776,7 @@ pre {
   gap: 20px;
 }
 .contribution-symbol {
-  color: var(--ink);
+  color: var(--color-text-primary);
   padding-top: 5px;
 }
 .contribution-guidelines h2 {
@@ -2789,7 +2789,7 @@ pre {
   margin-top: 16px;
   font-size: 14px;
   line-height: 1.85;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .contribution-guidelines .text-link {
   margin-top: 18px;
@@ -2798,7 +2798,7 @@ pre {
 .reporting-guide {
   margin-top: 95px;
   padding: 45px;
-  background: var(--mint);
+  background: var(--color-accent);
   border-radius: 12px;
 }
 .reporting-guide .section-heading {
@@ -2809,7 +2809,7 @@ pre {
   line-height: 1.8;
   max-width: 700px;
   margin-top: 24px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 .compat-flow {
   display: grid;
@@ -2825,7 +2825,7 @@ pre {
   padding-left: 21px;
   font-size: 14px;
   line-height: 1.85;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-top: 25px;
 }
 .compat-flow li {
@@ -2834,7 +2834,7 @@ pre {
 }
 .compat-flow > div > p {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   margin-block: 20px;
 }
 .formatting-section {
@@ -2851,7 +2851,7 @@ pre {
 }
 .formatting-section p {
   font-size: 14px;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   line-height: 1.85;
   margin-top: 23px;
 }
@@ -2866,11 +2866,11 @@ pre {
 .thanks-links a {
   padding: 30px;
   border-radius: 12px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   transition: background 0.2s;
 }
 .thanks-links a:hover {
-  background: var(--mint);
+  background: var(--color-accent);
 }
 .thanks-links h3 {
   font-family: var(--font-display);
@@ -2882,7 +2882,7 @@ pre {
   gap: 20px;
 }
 .thanks-links p {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 14px;
   line-height: 1.85;
   margin-top: 15px;
@@ -4109,7 +4109,7 @@ pre {
   .game-report-layout > aside > p {
     margin-top: 0;
     padding: 17px;
-    background: var(--surface);
+    background: var(--color-bg-surface);
     border-radius: 7px;
     font-size: 13px;
   }
@@ -4281,7 +4281,7 @@ pre {
   .docs-nav {
     position: static;
     padding: 18px;
-    background: var(--surface);
+    background: var(--color-bg-surface);
     border-radius: 9px;
   }
   .docs-nav > span {
@@ -4574,17 +4574,17 @@ main
   p:not(.experimental-note):not(.small-note):not(.compatibility-note):not(
     .platform-disclaimer
   ) {
-  color: var(--ink);
+  color: var(--color-text-primary);
 }
 .capture-copy p {
-  color: var(--field-muted) !important;
+  color: var(--color-field-text-muted) !important;
 }
 .platform-primary p,
 .download-platform-0 p {
-  color: var(--field-muted) !important;
+  color: var(--color-field-text-muted) !important;
 }
 .capture-copy p {
-  color: var(--field-muted);
+  color: var(--color-field-text-muted);
 }
 .download-band > a > div {
   justify-content: flex-end;

@@ -7,14 +7,14 @@
   padding: 0;
   border-radius: 50%;
   flex-shrink: 0;
-  background: var(--surface);
-  color: var(--ink);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
   transition:
     background 0.2s,
     transform 0.2s;
 }
 .theme-toggle:hover {
-  background: var(--tab-ground);
+  background: var(--color-bg-subtle);
   transform: rotate(-9deg);
 }
 
@@ -22,12 +22,12 @@
 .platform-primary,
 .download-platform-0,
 .site-footer {
-  background: var(--deep-field);
-  color: var(--on-field);
+  background: var(--color-field-bg-strong);
+  color: var(--color-field-text);
 }
 .hero-caption-chip {
-  background: var(--deep-field);
-  color: var(--on-field);
+  background: var(--color-field-bg-strong);
+  color: var(--color-field-text);
 }
 .button.light,
 .capture-selector button[aria-pressed="true"],
@@ -42,66 +42,66 @@
 .start-mark,
 .community-plus,
 .open-symbol {
-  color: var(--on-mint);
+  color: var(--color-on-accent);
 }
 .capture-selector button[aria-pressed="true"] {
-  color: var(--on-mint);
+  color: var(--color-on-accent);
 }
 .skip-link {
-  color: var(--on-mint);
+  color: var(--color-on-accent);
 }
 .button.light:hover {
-  background: var(--on-field);
-  color: var(--on-mint);
+  background: var(--color-field-text);
+  color: var(--color-on-accent);
 }
 :root[data-theme="dark"] .doc-callout {
-  color: var(--on-mint) !important;
+  color: var(--color-on-accent) !important;
 }
 :root[data-theme="dark"] .download-platform-2 > p,
 :root[data-theme="dark"] .platform-1 > p,
 :root[data-theme="dark"] .report-callout p,
 :root[data-theme="dark"] .inline-help p,
 :root[data-theme="dark"] .reporting-guide p {
-  color: var(--on-mint) !important;
+  color: var(--color-on-accent) !important;
 }
 :root[data-theme="dark"] .platform-1 .platform-card-heading > span,
 :root[data-theme="dark"] .download-platform-2 .download-platform-top > span {
-  background: #073f3b12;
+  background: color-mix(in srgb, var(--core-color-teal-800) 7%, transparent);
 }
 :root[data-theme="dark"] .hero-main-card {
-  background: #f7f9f8;
-  color: #073f3b;
+  background: var(--core-color-teal-50);
+  color: var(--core-color-teal-800);
 }
 :root[data-theme="dark"] .game-sleeve {
-  color: #073f3b;
+  color: var(--core-color-teal-800);
 }
 :root[data-theme="dark"] .hero-game-caption .status-in-game {
-  background: #e0efdb;
-  color: #285c31;
+  background: var(--core-color-green-100);
+  color: var(--core-color-green-700);
 }
 :root[data-theme="dark"] .thanks-links a:hover,
 :root[data-theme="dark"] .contributor-grid a:hover,
 :root[data-theme="dark"] .repository-links a:hover,
 :root[data-theme="dark"] .repo-stats > a:hover {
-  background: var(--tab-ground);
+  background: var(--color-bg-subtle);
 }
 :root[data-theme="dark"] .icon-button:hover:not(:disabled) {
-  color: var(--on-mint);
+  color: var(--color-on-accent);
 }
 :root[data-theme="dark"] .lightbox-controls .icon-button {
-  background: var(--on-field);
-  color: var(--on-mint);
+  background: var(--color-field-text);
+  color: var(--color-on-accent);
 }
 :root[data-theme="dark"] .lightbox {
-  color: var(--on-field);
+  color: var(--color-field-text);
 }
 :root[data-theme="dark"] .lightbox-close {
-  background: var(--deep-field);
-  color: var(--on-field);
+  background: var(--color-field-bg-strong);
+  color: var(--color-field-text);
 }
 ::selection {
-  background: var(--mint);
-  color: var(--on-mint);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
 .compatibility-summary {
@@ -120,7 +120,7 @@
 }
 main .compatibility-summary-heading p {
   font-size: 13px !important;
-  color: var(--muted) !important;
+  color: var(--color-text-secondary) !important;
 }
 .compatibility-bar {
   display: flex;
@@ -129,7 +129,7 @@ main .compatibility-summary-heading p {
   height: 20px;
   border-radius: 5px;
   overflow: hidden;
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .compatibility-segment {
   height: 100%;
@@ -142,22 +142,22 @@ a.compatibility-segment:hover {
 }
 .compatibility-segment:focus-visible {
   outline-offset: -4px;
-  outline-color: var(--on-mint);
+  outline-color: var(--color-on-accent);
 }
 .segment-in-game {
-  background: var(--chart-game);
+  background: var(--color-chart-success);
 }
 .segment-main-menu {
-  background: var(--chart-menu);
+  background: var(--color-chart-warning);
 }
 .segment-logo {
-  background: var(--chart-logo);
+  background: var(--color-chart-danger);
 }
 .segment-doesnt-boot {
-  background: var(--chart-boot);
+  background: var(--color-chart-neutral);
 }
 .segment-untested {
-  background: var(--chart-untested);
+  background: var(--color-chart-untested);
 }
 .compatibility-legend {
   display: grid;
@@ -191,18 +191,18 @@ a.compatibility-legend-item:hover {
   font-variant-numeric: tabular-nums;
 }
 .compatibility-legend-item strong > span {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-weight: 400;
 }
 .compatibility-percent {
   grid-column: 3;
   grid-row: 2;
   font-variant-numeric: tabular-nums;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 main p.compatibility-summary-note {
   font-size: 13px !important;
-  color: var(--muted) !important;
+  color: var(--color-text-secondary) !important;
   margin-top: 12px;
 }
 

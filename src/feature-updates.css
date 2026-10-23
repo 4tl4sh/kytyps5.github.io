@@ -4,7 +4,7 @@
   line-height: 1.85;
 }
 .featured-report-meta {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-size: 13px;
   line-height: 1.5;
 }
@@ -20,7 +20,7 @@
 .quick-start ul,
 .quick-start ol {
   font-size: 16px;
-  color: var(--ink);
+  color: var(--color-text-primary);
 }
 .quick-start-steps {
   padding-left: 25px;
@@ -31,7 +31,7 @@
   margin-block: 34px;
 }
 .quick-start-steps > li::marker {
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-weight: 600;
 }
 .quick-start h4 {
@@ -47,14 +47,14 @@
 }
 .quick-start-assets {
   padding: 16px 20px 16px 36px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: var(--control-radius);
 }
 .quick-start-assets li {
   margin-block: 7px;
 }
 .quick-start pre {
-  background: var(--surface);
+  background: var(--color-bg-surface);
   padding: 15px 19px;
   border-radius: var(--control-radius);
   overflow-x: auto;
@@ -72,10 +72,10 @@
   width: 36px;
   height: 38px;
   min-width: 36px;
-  color: var(--on-field);
+  color: var(--color-field-text);
 }
 .capture-controls .icon-button:hover {
-  background: var(--translucent-light);
+  background: var(--color-veil-light);
 }
 .capture-bottom {
   gap: 10px;
@@ -94,8 +94,8 @@
   right: 14px;
   width: 40px;
   height: 40px;
-  background: var(--deep-field);
-  color: var(--on-field);
+  background: var(--color-field-bg-strong);
+  color: var(--color-field-text);
   border-radius: var(--control-radius);
 }
 .capture-browse {
@@ -104,16 +104,16 @@
   gap: 9px;
   font-size: 13px;
   margin-bottom: 25px;
-  color: var(--on-field);
+  color: var(--color-field-text);
 }
 .capture-browse select {
   max-width: 100%;
   width: 100%;
   padding: 11px 13px;
-  border: 1px solid var(--field-line);
+  border: 1px solid var(--color-field-border);
   border-radius: var(--control-radius);
-  background: var(--field-dark);
-  color: var(--on-field);
+  background: var(--color-field-bg);
+  color: var(--color-field-text);
   font-size: 14px;
 }
 @media (max-width: 680px) {
