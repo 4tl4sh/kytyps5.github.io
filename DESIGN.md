@@ -208,6 +208,8 @@ A new family is generated in OKLCH by keeping the shared lightness scale, so tha
 4. Assign the new tones to roles in the semantic layer for both themes. Components never reference core tones directly.
 5. Check the contrast of every text/background pair that uses the new tones (at least AA, 4.5:1 for body text).
 
+The generated values are a starting point, not a rule. Small hand adjustments to a tone (a slight shift in hue, chroma or lightness) are fine when they make the palette more expressive, as with `teal-900` and the half-steps. Keep them subtle so the shared lightness scale still holds, mark them with a comment in `src/tokens.css` and recheck the contrast of the pairs they affect.
+
 ### Primary
 
 - **Forest Teal** (`color-text-primary`): primary text, actions, footer and feature fields. **Teal Hover** (`color-text-primary-hover`) is the primary button hover.
