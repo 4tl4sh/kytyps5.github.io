@@ -194,6 +194,20 @@ Colors are defined in `src/tokens.css` in two layers. The core layer (`--core-co
 
 Four core tones are hand-tuned and not generated: `teal-900` (a compromise between the light-mode field and code backgrounds and the dark-mode surface) and the half-steps `teal-650`, `amber-650` and `red-650` (the original muted text and status foregrounds, between 600 and 700). Keep them if the palette is regenerated.
 
+### Adding a palette
+
+A new family is generated in OKLCH by keeping the shared lightness scale, so that the same tone number has the same lightness in every family and contrast between tones stays predictable across families:
+
+| Tone | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| L | 0.98 | 0.94 | 0.90 | 0.83 | 0.74 | 0.64 | 0.53 | 0.43 | 0.34 | 0.27 | 0.21 |
+
+1. Pick a hue (and a reference chroma) for the family. Chroma rises from near zero at tone 50 to its peak around tones 400-600 (about 0.10-0.11 for `amber`, `red` and `green`) and falls again toward 950. A hue may drift along the ramp, as `teal` does.
+2. For each tone, set OKLCH `L` from the table above (within about 0.01), the chosen hue and the chroma for that tone. Reduce the chroma until the color fits sRGB, and keep the lightness unchanged.
+3. Convert each tone to hex and declare `--core-color-<family>-<tone>` in the core layer of `src/tokens.css`. If a tone must be tuned by hand, mark it with a comment and list it in the paragraph above.
+4. Assign the new tones to roles in the semantic layer for both themes. Components never reference core tones directly.
+5. Check the contrast of every text/background pair that uses the new tones (at least AA, 4.5:1 for body text).
+
 ### Primary
 
 - **Forest Teal** (`color-text-primary`): primary text, actions, footer and feature fields. **Teal Hover** (`color-text-primary-hover`) is the primary button hover.
