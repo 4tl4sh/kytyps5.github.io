@@ -58,9 +58,9 @@
   --core-color-neutral-0: #FFFFFF;
   --core-color-neutral-1000: #000000;
   /* Hand-tuned half-steps (not generated): original muted text and status foregrounds */
-  --core-color-teal-650: #4D6460;
-  --core-color-amber-650: #815218;
-  --core-color-red-650: #91463E;
+  --core-color-teal-650: #4D6460;  /* hand-tuned half-step */
+  --core-color-amber-650: #815218;  /* hand-tuned half-step */
+  --core-color-red-650: #91463E;  /* hand-tuned half-step */
 
   /* SEMANTIC — role-based names (light) */
   --color-bg-page: var(--core-color-teal-50);
